@@ -1,6 +1,7 @@
-import styles from './index.css';
+import React from 'react';
+
 import {TabBar} from 'antd-mobile';
-import Home from './home/page'
+import Home from './Index/page'
 
 export default class Index extends React.Component {
   constructor(props) {

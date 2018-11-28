@@ -1,0 +1,40 @@
+.head_portrait{
+  width:92%;
+  background: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:20px 4%;
+  font-size: 17px;
+  color:#000;
+}
+
+
+.head_portrait_title{
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.head_portrait>span{
+  display: flex;
+  align-items: center;
+}
+.head_portrait>span>.icon_name{
+  width:49px;
+  height:49px;
+  background: #fff;
+  border-radius: 2px;
+  /*margin-right:22px;*/
+}
+.icon_name_left{
+  width:15px;
+  height:15px;
+}
+
+.file{
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  width: 300px;
+  height: 100px;
+}
