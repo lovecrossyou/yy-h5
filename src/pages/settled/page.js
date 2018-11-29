@@ -1,8 +1,9 @@
 import React from 'react';
 
-import {List, InputItem, WhiteSpace, Button, WingBlank,ImagePicker,Icon} from 'antd-mobile';
+import {List, InputItem, WhiteSpace, Button, WingBlank, ImagePicker, Icon} from 'antd-mobile';
 import {createForm} from 'rc-form';
 import styles from './page.css'
+
 const Item = List.Item;
 
 class Settled extends React.Component {
@@ -31,13 +32,13 @@ class Settled extends React.Component {
 
   confirmClick = () => {
     this.props.form.validateFields((error, value) => {
-      console.log('error ',error)
-      console.log('value ',value)
+      console.log('error ', error)
+      console.log('value ', value)
     })
   }
 
   render() {
-    const { files } = this.state;
+    const {files} = this.state;
     const {getFieldProps} = this.props.form;
     return (
       <WingBlank>
@@ -57,28 +58,26 @@ class Settled extends React.Component {
           }}>
             <span className={styles.head_portrait_title}>店铺头像</span>
             <span>
- <input
-   className={styles.file}
-   type="file"
-   accept="image/*"
-   onChange={(e) => {
-     let files;
-     if (e.dataTransfer) {
-       files = e.dataTransfer.files;
-     } else if (e.target) {
-       files = e.target.files;
-     }
+              <input
+                className={styles.file}
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  let files;
+                  if (e.dataTransfer) {
+                    files = e.dataTransfer.files;
+                  } else if (e.target) {
+                    files = e.target.files;
+                  }
 
-
-   }}
- />
-              <img className={styles.icon_name}  alt=""/>
-              <Icon type="right"  color='#999999' />
+                }}
+              />
+              <img className={styles.icon_name} alt=""/>
+              <Icon type="right" color='#999999'/>
             </span>
           </div>
 
-
-          <Item >店铺图片</Item>
+          <Item>店内环境</Item>
           <ImagePicker
             length="6"
             files={files}

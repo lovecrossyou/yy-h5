@@ -15,6 +15,7 @@ export default {
       immer: true,
     }],
   ],
+  theme: './config/theme.config.js',
   proxy: {
     "/api": {
       // target: "http://123.57.161.212:9939/xitenggamejar/",
@@ -25,4 +26,5 @@ export default {
       pathRewrite: { "^/api" : "" }
     }
   },
+
 }
