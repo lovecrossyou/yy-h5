@@ -1,4 +1,6 @@
 import React from 'react';
+import { routerRedux } from 'dva/router';
+import {connect} from 'dva';
 
 import {List, InputItem, WhiteSpace, Button, WingBlank, ImagePicker, Icon} from 'antd-mobile';
 import {createForm} from 'rc-form';
@@ -49,12 +51,16 @@ class Settled extends React.Component {
             placeholder="店铺信息"
             ref={el => this.autoFocusInst = el}
           >店铺名称</InputItem>
-          <Item extra="北京市西城区百万庄大街" arrow="horizontal" onClick={() => {
-          }}>店铺地址</Item>
+          <Item
+            extra="北京市西城区百万庄大街"
+            arrow="horizontal"
+            onClick={() => {
+              this.props.dispatch(routerRedux.push('/settled/map'));
+            }}
+          >店铺地址</Item>
 
           <div className={styles.head_portrait} onClick={() => {
             // console.log('点击获取头像');
-            // props.dispatch(routerRedux.push('/personInfo/userPicture'));
           }}>
             <span className={styles.head_portrait_title}>店铺头像</span>
             <span>
@@ -119,6 +125,6 @@ class Settled extends React.Component {
   }
 }
 
-const
-  SettledWrapper = createForm()(Settled);
-export default SettledWrapper
+const SettledWrapper = createForm()(Settled);
+
+export default connect()(SettledWrapper)
