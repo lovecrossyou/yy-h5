@@ -14,6 +14,8 @@ class MobileLogin extends React.Component {
     this.state = {
       timeString:'获取验证码',
       activeTimer:false,
+      phoneNum:null,
+      check_code_enable:true
     }
 
     // 验证码倒计时
@@ -33,6 +35,40 @@ class MobileLogin extends React.Component {
     });
   }
 
+  //倒计时
+  startTick = ()=>{
+    this.timer = setInterval(()=>{
+      if(this.totalSec!=-1){
+        this.setState({
+          timeString:this.totalSec+'s',
+          check_code_enable:false
+        })
+        this.totalSec-- ;
+
+      }
+      else {
+        this.setState({
+          timeString:'获取验证码',
+          check_code_enable:true
+        })
+
+        this.resetTick();
+      }
+    },1000)
+  }
+
+  resetTick = ()=>{
+    this.totalSec = TOTALSEC ;
+    this.timer&&clearInterval(this.timer);
+    this.setState({
+      check_code_enable:true
+    })
+  }
+
+  componentWillUnmount() {
+    this.timer&&clearInterval(this.timer);
+  }
+
 
   render() {
     const { getFieldProps } = this.props.form;
@@ -41,18 +77,33 @@ class MobileLogin extends React.Component {
         <List>
           <InputItem
             {...getFieldProps('phoneNum')}
-            clear
             type={'phone'}
+            value={this.state.phoneNum}
             placeholder="请输入手机号"
+            onChange={phone=>{
+              console.log(phone);
+              this.setState({
+                phoneNum:phone
+              })
+            }}
             ref={el => this.autoFocusInst = el}
           >手机号</InputItem>
 
-          <InputItem
-            {...getFieldProps('checkCode')}
-            clear
-            placeholder="请输入验证码"
-            ref={el => this.autoFocusInst = el}
-          >验证码</InputItem>
+          <div className={styles.checkcode_wrapper}>
+            <InputItem
+              {...getFieldProps('checkCode')}
+              clear
+
+              placeholder="请输入验证码"
+              ref={el => this.autoFocusInst = el}
+            >验证码</InputItem>
+            <div
+              onClick={()=>{
+                if(!this.state.check_code_enable)return;
+                this.startTick();
+              }}
+              className={styles.btn_send}>{this.state.timeString}</div>
+          </div>
 
           <InputItem
             {...getFieldProps('password')}
@@ -100,10 +151,8 @@ class Login extends React.Component{
 
   render(){
     return (
-      <div>
-        <WhiteSpace/>
+      <div className={styles.container}>
         {this.state.showLoginForm?(<MobileLoginWrapper/>):(<Button type="warning" style={{marginRight: '16px', marginLeft: '16px'}} onClick={this.loginByMobilePhone}>输入手机号登录</Button>)}
-        <WhiteSpace/>
       </div>
     );
   }
