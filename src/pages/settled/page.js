@@ -2,10 +2,11 @@ import React from 'react';
 import { routerRedux } from 'dva/router';
 import {connect} from 'dva';
 
-import {List, InputItem, WhiteSpace, Button, WingBlank, ImagePicker, Icon} from 'antd-mobile';
+import {List, InputItem, WhiteSpace, Button, WingBlank, Radio,Flex, Icon} from 'antd-mobile';
 import {createForm} from 'rc-form';
 import styles from './page.css'
 
+const RadioItem = Radio.RadioItem;
 const Item = List.Item;
 
 class Settled extends React.Component {
@@ -116,8 +117,20 @@ class Settled extends React.Component {
         </List>
         <WhiteSpace/>
 
-        <Button type="primary" onClick={this.confirmClick}>确认</Button>
 
+        <div className={styles.footer_wrapper}>
+          <div className={styles.protocol_wrapper}>
+            <div className={styles.protocol}>
+              <Radio className={styles.footer_text_pre} onChange={e => console.log('checkbox', e)}>我已阅读并同意</Radio>
+            </div>
+            <div className={styles.footer_text_dec}>《翼优开店说明》</div>
+          </div>
+          <div className={styles.btn_confirm} onClick={this.confirmClick}>
+            <div className={styles.btn_confirm_text}>
+              我准备好了
+            </div>
+          </div>
+        </div>
       </WingBlank>
     );
   }
