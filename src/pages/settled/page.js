@@ -44,21 +44,13 @@ class Settled extends React.Component {
     const {getFieldProps} = this.props.form;
     return (
       <WingBlank>
-        <List renderHeader={() => '店铺信息'}>
+        <List>
           <InputItem
             {...getFieldProps('shopName')}
             clear
             placeholder="店铺信息"
             ref={el => this.autoFocusInst = el}
           >店铺名称</InputItem>
-          <Item
-            extra="北京市西城区百万庄大街"
-            arrow="horizontal"
-            onClick={() => {
-              this.props.dispatch(routerRedux.push('/settled/map'));
-            }}
-          >店铺地址</Item>
-
           <div className={styles.head_portrait} onClick={() => {
             // console.log('点击获取头像');
           }}>
@@ -82,42 +74,48 @@ class Settled extends React.Component {
               <Icon type="right" color='#999999'/>
             </span>
           </div>
-
-          <Item>店内环境</Item>
-          <ImagePicker
-            length="6"
-            files={files}
-            onChange={this.onChange}
-            onImageClick={(index, fs) => console.log(index, fs)}
-            selectable={files.length < 7}
-            onAddImageClick={this.onAddImageClick}
-          />
           <WhiteSpace/>
-        </List>
-        <WhiteSpace/>
-        <List renderHeader={() => '用户信息'}>
+
+          <Item
+            extra="北京市西城区百万庄大街"
+            arrow="horizontal"
+            onClick={() => {
+              this.props.dispatch(routerRedux.push('/settled/map'));
+            }}
+          >店铺地址</Item>
+
+          <Item
+            extra="去上传"
+            arrow="horizontal"
+            onClick={() => {
+              this.props.dispatch(routerRedux.push('/settled/map'));
+            }}
+          >店内环境</Item>
+          <WhiteSpace/>
+
           <InputItem
             {...getFieldProps('userName')}
             placeholder="姓名"
-          >姓名</InputItem>
+          >联系人</InputItem>
+          <InputItem
+            {...getFieldProps('phoneNum')}
+            type="phone"
+            placeholder="客服电话"
+          >客服电话</InputItem>
           <InputItem
             {...getFieldProps('phoneNum')}
             type="phone"
             placeholder="手机号码"
-          >手机号码</InputItem>
+          >手机号</InputItem>
+
+
         </List>
         <WhiteSpace/>
-        <List renderHeader={() => '提现信息'}>
-          <InputItem
-            {...getFieldProps('bankCard', {
-              initialValue: '',
-            })}
-            type="bankCard"
-            placeholder="1234 5678 0000"
-          >提现银行卡</InputItem>
+        <List>
+
         </List>
         <WhiteSpace/>
-        <WhiteSpace/>
+
         <Button type="primary" onClick={this.confirmClick}>确认</Button>
 
       </WingBlank>

@@ -93,7 +93,6 @@ class MobileLogin extends React.Component {
             <InputItem
               {...getFieldProps('checkCode')}
               clear
-
               placeholder="请输入验证码"
               ref={el => this.autoFocusInst = el}
             >验证码</InputItem>
