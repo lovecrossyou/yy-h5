@@ -1,7 +1,8 @@
 import {connect} from "dva";
 import {Icon, Tabs,Badge} from 'antd-mobile';
 
-import styles from './page.css'
+import styles from './page.less'
+import {DeliveryOrderItem} from "./components/DeliveryOrderItem";
 
 const tabs = [
   { title: <Badge text={'3'}>全部</Badge> },
@@ -31,17 +32,22 @@ const DeliveryList = () => {
   const contentHeight = document.documentElement.clientHeight - 100  ;
   return <div className={styles.delivery_list}>
     <Tabs tabs={tabs}
-          initialPage={1}
+          initialPage={0}
           onChange={(tab, index) => { console.log('onChange', index, tab); }}
           onTabClick={(tab, index) => { console.log('onTabClick', index, tab); }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center',height:contentHeight, backgroundColor: '#fff' }}>
-        Content of first tab
+      <div className={styles.delivery_wrapper}  style={{flexDirection:'column'}}>
+        <DeliveryOrderItem/>
+        <DeliveryOrderItem/>
+        <DeliveryOrderItem/>
+        <DeliveryOrderItem/>
+        <DeliveryOrderItem/>
+        <DeliveryOrderItem/>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: contentHeight, backgroundColor: '#fff' }}>
+      <div className={styles.delivery_wrapper} style={{height:contentHeight}}>
         Content of second tab
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: contentHeight, backgroundColor: '#fff' }}>
+      <div className={styles.delivery_wrapper} style={{height:contentHeight}}>
         Content of third tab
       </div>
     </Tabs>
