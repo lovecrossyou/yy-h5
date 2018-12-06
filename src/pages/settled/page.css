@@ -78,14 +78,10 @@
 }
 
 .address_wrapper{
-  position: fixed;
-  top: 300px;
+  margin-top: 300px;
   width: 100%;
-  height: 800%;
-  background-color: #999999;
-
-  display: flex;
-  flex-direction: column;
+  background-color:#FFFFFF;
+  overflow-y:scroll;
 }
 
 
@@ -96,7 +92,6 @@
   flex-direction: column;
   background-color: #FFFFFF;
   justify-content: center;
-
   padding-left: 10px;
   box-sizing: border-box;
 }
@@ -120,9 +115,9 @@
   right: 0;
   /*height: 86px;*/
   /*background-color: #999999;*/
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*justify-content: flex-end;*/
 }
 
 :global(.my-radio .am-radio ){
@@ -183,4 +178,23 @@
   color:rgba(255,255,255,1);
   line-height: 44px;
   color: #FFFFFF;
+}
+
+:global(.spe ){
+  width: 60px;
+  height: 60px;
+}
+
+
+:global(.result-example){
+  height: 100%;
+  position: absolute;
+  top: 25%;
+}
+
+:global(.sub-title) {
+  color: #888;
+  font-size: 14px;
+  padding: 30px 0 18px 0;
+  margin-left: 15px;
 }

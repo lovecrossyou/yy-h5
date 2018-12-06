@@ -5,10 +5,9 @@
 import React from 'react';
 import { connect } from "dva";
 import { routerRedux } from 'dva/router';
-import {List, InputItem, WhiteSpace, SearchBar, WingBlank, ImagePicker, Icon} from 'antd-mobile';
+import {List, InputItem, WhiteSpace, SearchBar, WingBlank, Icon} from 'antd-mobile';
 import { Map,MouseTool } from 'react-amap';
 import styles from './page.css'
-
 
 const AMAP_KEY = '636cecc12ec156b92252622edecfa8f5' ;
 const VERSION = '1.4.8' ;
@@ -67,15 +66,6 @@ class MapPage extends React.Component {
         </div>
         {/*地址列表*/}
         <div className={styles.address_wrapper}>
-          <AddressItem/>
-          <AddressItem/>
-          <AddressItem/>
-          <AddressItem/>
-          <AddressItem/>
-          <AddressItem/>
-          <AddressItem/>
-          <AddressItem/>
-          <AddressItem/>
           <AddressItem/>
           <AddressItem/>
         </div>

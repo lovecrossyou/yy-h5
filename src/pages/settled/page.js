@@ -37,6 +37,7 @@ class Settled extends React.Component {
     this.props.form.validateFields((error, value) => {
       console.log('error ', error)
       console.log('value ', value)
+      this.props.dispatch(routerRedux.push('/settled/applyresult'));
     })
   }
 
@@ -44,7 +45,7 @@ class Settled extends React.Component {
     const {files} = this.state;
     const {getFieldProps} = this.props.form;
     return (
-      <WingBlank>
+      <div>
         <List>
           <InputItem
             {...getFieldProps('shopName')}
@@ -89,7 +90,7 @@ class Settled extends React.Component {
             extra="去上传"
             arrow="horizontal"
             onClick={() => {
-              this.props.dispatch(routerRedux.push('/settled/map'));
+              this.props.dispatch(routerRedux.push('/settled/imagepicker'));
             }}
           >店内环境</Item>
           <WhiteSpace/>
@@ -117,7 +118,6 @@ class Settled extends React.Component {
         </List>
         <WhiteSpace/>
 
-
         <div className={styles.footer_wrapper}>
           <div className={styles.protocol_wrapper}>
             <div className={styles.protocol}>
@@ -131,7 +131,7 @@ class Settled extends React.Component {
             </div>
           </div>
         </div>
-      </WingBlank>
+      </div>
     );
   }
 }
