@@ -8,8 +8,6 @@ export const DeliveryOrderItem = ()=>{
       <div className={styles.item_product_img}/>
       <div className={styles.item_product_img}/>
       <div className={styles.item_product_img}/>
-      <div className={styles.item_product_img}/>
-      <div className={styles.item_product_img}/>
     </div>
   </div>
 }
