@@ -3,6 +3,7 @@ import {connect} from 'dva';
 import { routerRedux } from 'dva/router';
 import {Button, WhiteSpace,InputItem,List} from 'antd-mobile';
 import { createForm } from 'rc-form';
+import DocumentTitle from 'react-document-title';
 
 import styles from './page.less'
 
@@ -73,60 +74,63 @@ class MobileLogin extends React.Component {
   render() {
     const { getFieldProps } = this.props.form;
     return (
-      <div>
-        <List>
-          <InputItem
-            {...getFieldProps('phoneNum')}
-            type={'phone'}
-            value={this.state.phoneNum}
-            placeholder="请输入手机号"
-            onChange={phone=>{
-              console.log(phone);
-              this.setState({
-                phoneNum:phone
-              })
-            }}
-            ref={el => this.autoFocusInst = el}
-          >手机号</InputItem>
-
-          <div className={styles.checkcode_wrapper}>
+      <DocumentTitle title='重置密码'>
+        <div>
+          <List>
             <InputItem
-              {...getFieldProps('checkCode')}
-              clear
-              placeholder="请输入验证码"
-              ref={el => this.autoFocusInst = el}
-            >验证码</InputItem>
-            <div
-              onClick={()=>{
-                if(!this.state.check_code_enable)return;
-                this.startTick();
+              {...getFieldProps('phoneNum')}
+              type={'phone'}
+              value={this.state.phoneNum}
+              placeholder="请输入手机号"
+              onChange={phone=>{
+                console.log(phone);
+                this.setState({
+                  phoneNum:phone
+                })
               }}
-              className={styles.btn_send}>{this.state.timeString}</div>
-          </div>
+              ref={el => this.autoFocusInst = el}
+            >手机号</InputItem>
 
-          <InputItem
-            {...getFieldProps('password')}
-            clear
-            type="password"
-            placeholder="****"
-            ref={el => this.autoFocusInst = el}
-          >输入密码</InputItem>
-          <InputItem
-            {...getFieldProps('password_confirm')}
-            clear
-            type="password"
-            placeholder="****"
-            ref={el => this.autoFocusInst = el}
-          >再次输入密码</InputItem>
+            <div className={styles.checkcode_wrapper}>
+              <InputItem
+                {...getFieldProps('checkCode')}
+                clear
+                placeholder="请输入验证码"
+                ref={el => this.autoFocusInst = el}
+              >验证码</InputItem>
+              <div
+                onClick={()=>{
+                  if(!this.state.check_code_enable)return;
+                  this.startTick();
+                }}
+                className={styles.btn_send}>{this.state.timeString}</div>
+            </div>
+
+            <InputItem
+              {...getFieldProps('password')}
+              clear
+              type="password"
+              placeholder="****"
+              ref={el => this.autoFocusInst = el}
+            >输入密码</InputItem>
+            <InputItem
+              {...getFieldProps('password_confirm')}
+              clear
+              type="password"
+              placeholder="****"
+              ref={el => this.autoFocusInst = el}
+            >再次输入密码</InputItem>
 
 
-          <div className={styles.btn_confirm}>
-            <List.Item>
-              <Button type="primary" onClick={this.confirmClick}>确认</Button>
-            </List.Item>
-          </div>
-        </List>
-      </div>)
+            <div className={styles.btn_confirm}>
+              <List.Item>
+                <Button type="primary" onClick={this.confirmClick}>确认</Button>
+              </List.Item>
+            </div>
+          </List>
+        </div>
+      </DocumentTitle>
+      )
   }
 }
 

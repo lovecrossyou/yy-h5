@@ -3,6 +3,7 @@ import {connect} from 'dva';
 import { routerRedux } from 'dva/router';
 import {Button, WhiteSpace,InputItem,List} from 'antd-mobile';
 import { createForm } from 'rc-form';
+import DocumentTitle from 'react-document-title';
 
 import styles from './page.less'
 
@@ -37,32 +38,35 @@ class MobileLogin extends React.Component {
   render() {
     const { getFieldProps } = this.props.form;
     return (
-      <div>
-        <List>
-          <InputItem
-            {...getFieldProps('phoneNum')}
-            clear
-            type={'phone'}
-            placeholder="请输入手机号"
-            ref={el => this.autoFocusInst = el}
-          >手机号</InputItem>
+      <DocumentTitle title='登录'>
+        <div>
+          <List>
+            <InputItem
+              {...getFieldProps('phoneNum')}
+              clear
+              type={'phone'}
+              placeholder="请输入手机号"
+              ref={el => this.autoFocusInst = el}
+            >手机号</InputItem>
 
-          <InputItem
-            {...getFieldProps('password')}
-            clear
-            type="password"
-            placeholder="****"
-            ref={el => this.autoFocusInst = el}
-          >密码</InputItem>
+            <InputItem
+              {...getFieldProps('password')}
+              clear
+              type="password"
+              placeholder="****"
+              ref={el => this.autoFocusInst = el}
+            >密码</InputItem>
 
 
-          <div className={styles.btn_confirm}>
-            <List.Item>
-              <Button type="primary" onClick={this.confirmClick}>登陆</Button>
-            </List.Item>
-          </div>
-        </List>
-      </div>)
+            <div className={styles.btn_confirm}>
+              <List.Item>
+                <Button type="primary" onClick={this.confirmClick}>登陆</Button>
+              </List.Item>
+            </div>
+          </List>
+        </div>
+      </DocumentTitle>
+      )
   }
 }
 

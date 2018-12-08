@@ -13,6 +13,11 @@ function checkStatus(response) {
   throw error;
 }
 
+const BaseUrl = (url) => {
+  return config.apiPrefix + url;
+}
+
+
 /**
  * Requests a URL, returning a promise.
  *
@@ -20,33 +25,20 @@ function checkStatus(response) {
  * @param  {object} [options] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default async function request(url, options) {
+export default async function request(url, options,type='json') {
 
+  const accessInfo = getAccessToken();
+  const body = Object.assign(options.body || {}, {accessInfo: accessInfo});
   console.log('request ', url);
-
-  const accessToken = getAccessToken();
-  let opt;
-  if (options.method === 'get') {
-    opt = {
-      headers: {
-        'accessToken': accessToken,
-        'Content-Type': 'application/json',
-      },
-      method: options.method,
-    };
-  }
-  else {
-    opt = {
-      body: JSON.stringify(options.body),
-      headers: {
-        'accessToken': accessToken,
-        'Content-Type': 'application/json',
-      },
-      method: options.method,
-    };
-  }
-  console.log('opt ', opt);
-  const response = await fetch(config.apiPrefix+ url, opt);
-  checkStatus(response);
+  console.log('request payload ', body);
+  let opt = {
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: options.method,
+  };
+  const response = await fetch(BaseUrl(url), opt);
+  if (type !== 'json') return response.text();
   return response.json();
 }
