@@ -3,6 +3,7 @@ import React from 'react';
 import {TabBar} from 'antd-mobile';
 import Home from './Index/page'
 import Manager from './manage/page'
+import Me from './me/page'
 
 export default class Index extends React.Component {
   constructor(props) {
@@ -134,7 +135,7 @@ export default class Index extends React.Component {
               });
             }}
           >
-            {this.renderContent('Mine')}
+            <Me/>
           </TabBar.Item>
         </TabBar>
       </div>
