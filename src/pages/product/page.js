@@ -5,7 +5,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { List, InputItem, WhiteSpace, Button } from 'antd-mobile';
 import { createForm } from 'rc-form';
-import * as routerRedux from 'react-router-redux';
+import { routerRedux } from 'dva/router';
 import DocumentTitle from 'react-document-title';
 
 import styles from './page.css';
@@ -87,7 +87,7 @@ class ProductEdit extends React.Component {
               extra=""
               arrow="horizontal"
               onClick={() => {
-                this.props.dispatch(routerRedux.push('/settled/map'));
+                this.props.dispatch(routerRedux.push('/product/productcategory'));
               }}
             >商品分类</Item>
 

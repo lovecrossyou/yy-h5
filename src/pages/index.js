@@ -2,6 +2,7 @@ import React from 'react';
 
 import {TabBar} from 'antd-mobile';
 import Home from './Index/page'
+import Manager from './manage/page'
 
 export default class Index extends React.Component {
   constructor(props) {
@@ -105,7 +106,7 @@ export default class Index extends React.Component {
             }}
             data-seed="logId1"
           >
-            {this.renderContent('Koubei')}
+            <Manager/>
           </TabBar.Item>
           <TabBar.Item
             icon={
