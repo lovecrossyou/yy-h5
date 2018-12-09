@@ -27,7 +27,17 @@ function WithDraw(props) {
       </div>
     </div>
     <div className={styles.footer_btn}>
-      <Button type="primary" onClick={confirmClick}>完成</Button>
+      <Button
+        type="primary"
+        onClick={()=>{
+          props.dispatch(routerRedux.push('/withdraw/withdraw'))
+        }}>提现</Button>
+    </div>
+
+    <div className={styles.record}>
+      <div className={styles.record_text}>
+        提现记录
+      </div>
     </div>
   </div>
 }

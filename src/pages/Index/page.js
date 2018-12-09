@@ -13,6 +13,7 @@ export default class Home extends React.Component {
         <Link to="/product/page"><h1>商品编辑</h1></Link>
         <Link to="/manage/page"><h1>管理</h1></Link>
         <Link to="/withdraw/page"><h1>提现</h1></Link>
+        <Link to="/withdraw/addbank"><h1>添加银行卡</h1></Link>
       </div>
     );
   }
