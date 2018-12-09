@@ -1,5 +1,6 @@
 import {connect} from "dva";
 import {Icon, Tabs,Badge} from 'antd-mobile';
+import DocumentTitle from 'react-document-title';
 
 import styles from './page.less'
 import {DeliveryOrderItem} from "./components/DeliveryOrderItem";
@@ -33,6 +34,7 @@ const DeliveryList = () => {
   return <div className={styles.delivery_list}>
     <Tabs tabs={tabs}
           initialPage={0}
+          swipeable={false}
           onChange={(tab, index) => { console.log('onChange', index, tab); }}
           onTabClick={(tab, index) => { console.log('onTabClick', index, tab); }}
     >
@@ -55,10 +57,12 @@ const DeliveryList = () => {
 }
 
 function Home(props) {
-  return <div>
-    <ShopHeader/>
-    <DeliveryList/>
-  </div>
+  return <DocumentTitle title='首页'>
+    <div>
+      <ShopHeader/>
+      <DeliveryList/>
+    </div>
+  </DocumentTitle>
 }
 
 export default connect()(Home)

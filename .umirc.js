@@ -12,6 +12,7 @@ export default {
       immer: true,
     }],
   ],
+  theme: './config/theme.config.js',
   proxy: {
     "/api": {
       target: "https://www.xiteng.com/xitenggamejar/",

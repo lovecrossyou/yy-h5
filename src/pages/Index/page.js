@@ -12,6 +12,7 @@ export default class Home extends React.Component {
         <Link to="/classify/page"><h1>分类</h1></Link>
         <Link to="/product/page"><h1>商品编辑</h1></Link>
         <Link to="/manage/page"><h1>管理</h1></Link>
+        <Link to="/withdraw/page"><h1>提现</h1></Link>
       </div>
     );
   }
