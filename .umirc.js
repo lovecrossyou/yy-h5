@@ -4,7 +4,7 @@ export default {
     ios:9
   },
   publicPath:'./',
-  base:'/xitenggamenode/',
+  base:'/yy/',
   plugins: [
     ['umi-plugin-react', {
       antd: true,
