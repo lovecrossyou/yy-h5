@@ -18,6 +18,7 @@ function DoWithDraw(props) {
 
 
   return <div>
+    <List>
     <div className={styles.withdraw_header}>
       <div className={styles.withdraw_content_title}>到账银行卡</div>
       <div className={styles.bank_wrapper}>
@@ -28,7 +29,6 @@ function DoWithDraw(props) {
         <Icon type='right' color='#999999'></Icon>
       </div>
     </div>
-
     <div className={styles.withdraw_content}>
 
       <div className={styles.withdraw_amount}>
@@ -61,6 +61,7 @@ function DoWithDraw(props) {
           }}>提现</Button>
       </div>
     </div>
+    </List>
   </div>;
 }
 

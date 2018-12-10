@@ -19,3 +19,7 @@
 .list code {
   background: #f7f7f7;
 }
+
+:global(.fake-input){
+  font-size: 38px!important;
+}
