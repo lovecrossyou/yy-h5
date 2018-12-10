@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {connect} from "dva";
 import {Icon, Tabs,Badge} from 'antd-mobile';
 import DocumentTitle from 'react-document-title';
