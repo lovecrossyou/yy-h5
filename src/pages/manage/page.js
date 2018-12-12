@@ -64,12 +64,12 @@ const WithdrawMgr ={
 }
 
 
-const MgrItem = ({item=null})=>{
+const MgrItem = ({item=null,onClick})=>{
   if(item==null){
     return <div className={styles.mgr_item_empty}>
     </div>
   }
-  return <div className={styles.mgr_item}>
+  return <div className={styles.mgr_item} onClick={onClick}>
     <img className={styles.mgr_item_img} src={item.img} alt=""/>
     <div className={styles.mgr_item_label}>{item.label}</div>
   </div>
@@ -80,13 +80,25 @@ function Manager(props) {
   return <DocumentTitle title='管理'>
     <div className={styles.mgr_container}>
       <div className={styles.mgr_row}>
-        <MgrItem item={LabelMgr}/>
-        <MgrItem item={ProductMgr}/>
+        <MgrItem
+          item={LabelMgr}
+          onClick={()=>{
+            props.dispatch(routerRedux.push('/classify/page'))
+          }}/>
+        <MgrItem
+          item={ProductMgr}
+          onClick={()=>{
+            props.dispatch(routerRedux.push('/product/page'))
+          }}/>
         <MgrItem item={SaleMgr}/>
       </div>
 
       <div className={styles.mgr_row}>
-        <MgrItem item={OperatorMgr}/>
+        <MgrItem
+          item={OperatorMgr}
+          onClick={()=>{
+            props.dispatch(routerRedux.push('/shop/operatormgr'))
+          }}/>
         <MgrItem item={OrderMgr}/>
         <MgrItem item={ShopMgr}/>
       </div>

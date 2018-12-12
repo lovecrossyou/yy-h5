@@ -3,6 +3,7 @@ import React from 'react';
 import {connect} from "dva";
 import {Icon, Tabs,Badge} from 'antd-mobile';
 import DocumentTitle from 'react-document-title';
+import { routerRedux } from 'dva/router';
 
 import styles from './page.less'
 import {DeliveryOrderItem} from "./components/DeliveryOrderItem";
@@ -31,7 +32,9 @@ const ShopHeader = () => {
 }
 
 
-const DeliveryList = () => {
+
+
+const DeliveryList = ({onClick}) => {
   const contentHeight = document.documentElement.clientHeight - 100  ;
   return <div className={styles.delivery_list}>
     <Tabs tabs={tabs}
@@ -41,12 +44,10 @@ const DeliveryList = () => {
           onTabClick={(tab, index) => { console.log('onTabClick', index, tab); }}
     >
       <div className={styles.delivery_wrapper}  style={{flexDirection:'column'}}>
-        <DeliveryOrderItem/>
-        <DeliveryOrderItem/>
-        <DeliveryOrderItem/>
-        <DeliveryOrderItem/>
-        <DeliveryOrderItem/>
-        <DeliveryOrderItem/>
+        <DeliveryOrderItem onClick={onClick}/>
+        <DeliveryOrderItem onClick={onClick}/>
+        <DeliveryOrderItem onClick={onClick}/>
+
       </div>
       <div className={styles.delivery_wrapper} style={{height:contentHeight}}>
         Content of second tab
@@ -58,11 +59,15 @@ const DeliveryList = () => {
   </div>
 }
 
+
 function Home(props) {
   return <DocumentTitle title='首页'>
     <div>
       <ShopHeader/>
-      <DeliveryList/>
+      <DeliveryList
+        onClick={order=>{
+          props.dispatch(routerRedux.push('/order/page'))
+        }}/>
     </div>
   </DocumentTitle>
 }

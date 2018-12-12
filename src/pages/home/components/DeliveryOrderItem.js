@@ -2,8 +2,8 @@ import {Icon} from 'antd-mobile';
 
 import styles from './page.css'
 import React from 'react';
-export const DeliveryOrderItem = ()=>{
-  return <div className={styles.item}>
+export const DeliveryOrderItem = ({onClick})=>{
+  return <div className={styles.item} onClick={onClick}>
     <div className={styles.item_addr}>北京市朝阳区安贞门神新家园562号楼4单元230</div>
     <div className={styles.item_contact}>任艳彤 18356248596</div>
 
