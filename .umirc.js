@@ -1,7 +1,8 @@
 export default {
   history: 'hash',
-  targets:{
-    ios:9
+  targets: {
+    android: 6,
+    ios: 7,
   },
   publicPath:'./',
   base:'/yy/',
