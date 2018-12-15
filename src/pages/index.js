@@ -1,7 +1,10 @@
 import React from 'react';
 
 import {TabBar} from 'antd-mobile';
+
+// import Home from '../pages/home/page'
 import Home from './Index/page'
+
 import Manager from './manage/page'
 import Me from './me/page'
 

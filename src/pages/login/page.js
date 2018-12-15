@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'dva';
 import { routerRedux } from 'dva/router';
-import {Button, WhiteSpace,InputItem,List} from 'antd-mobile';
+import {Button, WhiteSpace,InputItem,List,Toast} from 'antd-mobile';
 import { createForm } from 'rc-form';
 import DocumentTitle from 'react-document-title';
 
@@ -31,6 +31,7 @@ class MobileLogin extends React.Component {
   handleClick = () => {
     this.props.form.validateFields((error, value) => {
       console.log(error, value);
+      this.props.loginClick(value);
     });
   }
 
@@ -42,7 +43,7 @@ class MobileLogin extends React.Component {
         <div>
           <List>
             <InputItem
-              {...getFieldProps('phoneNum')}
+              {...getFieldProps('username')}
               clear
               type={'phone'}
               placeholder="请输入手机号"
@@ -57,10 +58,9 @@ class MobileLogin extends React.Component {
               ref={el => this.autoFocusInst = el}
             >密码</InputItem>
 
-
             <div className={styles.btn_confirm}>
               <List.Item>
-                <Button type="primary" onClick={this.confirmClick}>登陆</Button>
+                <Button type="primary" onClick={this.handleClick}>登陆</Button>
               </List.Item>
             </div>
           </List>
@@ -75,16 +75,30 @@ const MobileLoginWrapper = createForm()(MobileLogin);
 
 class Login extends React.Component{
 
-  constructor(props){
-    super(props)
-    this.state = {
-      showLoginForm:true,
+  // 登录
+  loginClick = params=>{
+    console.log('login params ',params);
+    let username = params.username ;
+    if(username==undefined){
+      Toast.show('请输入用户名')
+      return;
     }
-  }
 
-  loginByMobilePhone = ()=>{
-    this.setState({
-      showLoginForm:true
+    username = username.replace(/\s+/g,"") ;
+    let password = params.password ;
+    if(password==undefined){
+      Toast.show('请输入密码')
+      return;
+    }
+    this.props.dispatch({
+      type:'login/login',
+      payload:{
+        username:username,
+        password:password
+      },
+      cb:()=>{
+        this.props.dispatch(routerRedux.replace('/'));
+      }
     })
   }
 
@@ -93,7 +107,7 @@ class Login extends React.Component{
       <div>
         <div className={styles.login_wrapper}>
           <WhiteSpace/>
-          {this.state.showLoginForm?(<MobileLoginWrapper/>):(<Button type="warning" style={{marginRight: '16px', marginLeft: '16px'}} onClick={this.loginByMobilePhone}>输入手机号登录</Button>)}
+          <MobileLoginWrapper loginClick={this.loginClick}/>
           <WhiteSpace/>
           {/*注册忘记密码*/}
           <div className={styles.rigister_wrapper}>

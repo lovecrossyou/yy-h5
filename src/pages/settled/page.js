@@ -3,7 +3,7 @@ import { routerRedux } from 'dva/router';
 import {connect} from 'dva';
 import DocumentTitle from 'react-document-title';
 
-import {List, InputItem, WhiteSpace, Button, WingBlank, Radio,Flex, Icon} from 'antd-mobile';
+import {List, InputItem, WhiteSpace, Button, TextareaItem, Radio, Icon} from 'antd-mobile';
 import {createForm} from 'rc-form';
 import styles from './page.css'
 
@@ -38,7 +38,28 @@ class Settled extends React.Component {
     this.props.form.validateFields((error, value) => {
       console.log('error ', error)
       console.log('value ', value)
-      this.props.dispatch(routerRedux.push('/settled/applyresult'));
+
+      this.props.dispatch({
+        type:'settled/createShop',
+        payload:{
+          "name":"第一个店铺",
+          "shopType":"convenience_store",
+          "imageUrl":"http://img3.duitang.com/uploads/item/201511/14/20151114125146_LXHzE.jpeg",
+          "presentation":"店铺介绍",
+          "shopDetailImage":["11111","22222"],
+          "locationInfo":{
+            "longitude":34.991231,
+            "latitude":113.091231,
+            "addressName":"小测试地址名称"
+          },
+          "telephone":"18610824157",
+          "adminName":"我是店长",
+          "adminMobilePhone":"18610824157"
+        },
+        cb:()=>{
+          this.props.dispatch(routerRedux.push('/settled/applyresult'));
+        }
+      })
     })
   }
 
@@ -50,7 +71,7 @@ class Settled extends React.Component {
         <div>
           <List>
             <InputItem
-              {...getFieldProps('shopName')}
+              {...getFieldProps('name')}
               clear
               placeholder="店铺信息"
               ref={el => this.autoFocusInst = el}
@@ -72,6 +93,17 @@ class Settled extends React.Component {
                     files = e.target.files;
                   }
 
+                  this.props.dispatch({
+                    type: 'global/upload',
+                    payload: files[0],
+                    cb: (imgUrl) => {
+                      this.props.dispatch({
+                        type: 'settled/saveImageUrl',
+                        payload:imgUrl
+                      });
+                    },
+                  });
+
                 }}
               />
               <img className={styles.icon_name} alt=""/>
@@ -81,7 +113,7 @@ class Settled extends React.Component {
             <WhiteSpace/>
 
             <Item
-              extra="北京市西城区百万庄大街"
+              extra="请选择地区"
               arrow="horizontal"
               onClick={() => {
                 this.props.dispatch(routerRedux.push('/settled/map'));
@@ -98,20 +130,27 @@ class Settled extends React.Component {
             <WhiteSpace/>
 
             <InputItem
-              {...getFieldProps('userName')}
+              {...getFieldProps('adminName')}
               placeholder="姓名"
-            >联系人</InputItem>
+            >店长</InputItem>
             <InputItem
-              {...getFieldProps('phoneNum')}
+              {...getFieldProps('telephone')}
               type="phone"
               placeholder="客服电话"
             >客服电话</InputItem>
             <InputItem
-              {...getFieldProps('phoneNum')}
+              {...getFieldProps('adminMobilePhone')}
               type="phone"
               placeholder="手机号码"
             >手机号</InputItem>
 
+            <TextareaItem
+              {...getFieldProps('presentation')}
+              title="店铺介绍"
+              autoHeight
+              placeholder='产品质优价廉，请各位放心！'
+              labelNumber={5}
+            />
 
           </List>
           <WhiteSpace/>
@@ -127,7 +166,7 @@ class Settled extends React.Component {
               </div>
               <div className={styles.footer_text_dec}>《翼优开店说明》</div>
             </div>
-            <div className={styles.btn_confirm} onClick={this.confirmClick}>
+            <div className={styles.btn_confirm} >
               <Button type="primary" onClick={this.confirmClick}>我准备好了</Button>
             </div>
           </div>

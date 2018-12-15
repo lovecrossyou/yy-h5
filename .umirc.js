@@ -16,10 +16,10 @@ export default {
   theme: './config/theme.config.js',
   proxy: {
     "/api": {
-      target: "https://www.xiteng.com/xitenggamejar/",
+      target: "http://47.94.209.108:7002/",
       changeOrigin: true,
       secure: false,
       pathRewrite: { "^/api" : "" }
-    }
+    },
   },
 }

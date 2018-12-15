@@ -1,5 +1,7 @@
 import fetch from 'dva/fetch';
+
 import { getAccessToken } from './authority';
+
 import config from './config';
 
 
@@ -26,19 +28,32 @@ const BaseUrl = (url) => {
  * @return {object}           An object containing either "data" or "err"
  */
 export default async function request(url, options,type='json') {
-
   const accessInfo = getAccessToken();
-  const body = Object.assign(options.body || {}, {accessInfo: accessInfo});
+  console.log('accessInfo ',accessInfo);
+  const body = options.body ;
   console.log('request ', url);
   console.log('request payload ', body);
-  let opt = {
-    body: JSON.stringify(body),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    method: options.method,
-  };
+  let opt = {} ;
+  if(options.method==='get'){
+    opt = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: options.method,
+    };
+  }
+  else {
+    opt = {
+      body: JSON.stringify(body),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: options.method,
+    };
+  }
   const response = await fetch(BaseUrl(url), opt);
+  checkStatus(response);
   if (type !== 'json') return response.text();
-  return response.json();
+  const responseJson = response.json();
+  return responseJson;
 }

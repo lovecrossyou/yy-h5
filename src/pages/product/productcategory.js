@@ -13,25 +13,38 @@ import { routerRedux } from 'dva/router';
 import styles from './page.css'
 import React from 'react';
 
-const confirmClick = ()=>{
 
-}
-
-const CategoryItem = ({label})=>{
-  return <div className={styles.category_item}>
+const CategoryItem = ({label,onClick})=>{
+  return <div className={styles.category_item} onClick={onClick}>
     {label}
   </div>
 }
 
 
 function ProductCategory(props) {
+  const {category_list} = props.store ;
+
+  console.log('category_list ',category_list)
   return (
     <DocumentTitle title='商品分类'>
       <div>
        <div>
-         <CategoryItem label='生活用品'/>
-         <CategoryItem label='酒水'/>
-         <CategoryItem label='水果'/>
+         {
+           category_list.map((c,index)=>{
+             return (
+               <CategoryItem
+                 onClick={()=>{
+                   props.dispatch({
+                     type:'product/saveActiveCategory',
+                     payload:c
+                   })
+                   props.dispatch(routerRedux.goBack());
+                 }}
+                 label={c.name}
+                 key={index+'#'}/>
+             )
+           })
+         }
        </div>
         <div className={styles.footer_btn}>
           <Button type="primary" onClick={()=>{
@@ -44,4 +57,8 @@ function ProductCategory(props) {
 }
 
 
-export default connect()(ProductCategory)
+export default connect(state=>{
+  return {
+    store:state.product
+  }
+})(ProductCategory)

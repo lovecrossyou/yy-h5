@@ -3,16 +3,14 @@
  */
 
 import {connect} from 'dva';
-import {TextareaItem,Button} from 'antd-mobile';
+import {TextareaItem,Button,Toast} from 'antd-mobile';
 import { createForm } from 'rc-form';
 import DocumentTitle from 'react-document-title';
 
 import styles from './page.css'
 import React from 'react';
+import * as routerRedux from 'react-router-redux';
 
-const confirmClick = ()=>{
-
-}
 
 function ProductSummary(props) {
   return (
@@ -20,7 +18,7 @@ function ProductSummary(props) {
       <div>
         <div className={styles.summary_content}>
           <TextareaItem
-            {...props.form.getFieldProps('count', {
+            {...props.form.getFieldProps('productDescribe', {
               initialValue: '',
             })}
             placeholder="7天无理由退货，180天质保"
@@ -29,7 +27,24 @@ function ProductSummary(props) {
           />
         </div>
         <div className={styles.footer_btn}>
-          <Button type="primary" onClick={confirmClick}>完成</Button>
+          <Button
+            type="primary"
+            onClick={()=>{
+              props.form.validateFields((error, value) => {
+                console.log(error, value);
+                console.log('saveSummary ',value);
+                const productDescribe = value.productDescribe ;
+                if(productDescribe==undefined||productDescribe===''){
+                  Toast.show('请输入描述信息')
+                  return;
+                }
+                props.dispatch({
+                  type:'product/saveSummary',
+                  payload:productDescribe
+                })
+                props.dispatch(routerRedux.goBack());
+              });
+            }}>完成</Button>
         </div>
       </div>
     </DocumentTitle>

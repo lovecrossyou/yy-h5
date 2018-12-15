@@ -1,9 +1,9 @@
 import request from '../../../utils/request';
 
-export async function fetchFirstCategory() {
-  return request('/discountProduct/firstCategory',{
+export async function fetchCategoryList(params) {
+  return request('/merchant/shop/productCategory/list',{
     method:'post',
-    body:{}
+    body:params
   });
 }
 

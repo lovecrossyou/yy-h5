@@ -1,9 +1,11 @@
-import { fetchFirstCategory ,fetchSecondCategory,productOfSecondCategory} from '../service/classify';
+import { Toast} from 'antd-mobile';
+
+import { fetchCategoryList ,fetchSecondCategory,productOfSecondCategory} from '../service/classify';
 
 export default {
   namespace: 'classify',
   state: {
-    first_category_list:[],
+    category_list:[],
     second_category_list:[],
     productOfSecondCategory:[],
   },
@@ -13,7 +15,7 @@ export default {
         if (pathname === '/classify/page') {
           // setTokenFromQueryString(query);
           dispatch({
-            type: 'firstCategory',
+            type: 'categoryList',
             payload: {},
           });
         }
@@ -31,22 +33,32 @@ export default {
   },
   // 异步
   effects: {
-    * firstCategory({ payload, cb }, { call, put }) {
-      const list = yield call(fetchFirstCategory, {});
+    * categoryList({ payload, cb }, { call, put,select }) {
+      const global = yield select(state => {
+        return state.global;
+      });
+      const shopId = global.tokenInfo.shopId ;
+      const res = yield call(fetchCategoryList, {
+        id:shopId
+      });
+      if(res.status === '-1'){
+        Toast.show(res.message);
+        return;
+      }
       yield put({
-        type: 'saveFirstCategory',
-        payload: list,
+        type: 'saveCategory',
+        payload: res.data,
       });
 
       //继续请求第一个分类的内容
-      const selectCategory = list[0];
-      const second_category_list = yield call(fetchSecondCategory, {
-        firstCategoryId:selectCategory.firstCategoryId
-      });
-      yield put({
-        type: 'saveSecondCategory',
-        payload: second_category_list,
-      });
+      // const selectCategory = list[0];
+      // const second_category_list = yield call(fetchSecondCategory, {
+      //   firstCategoryId:selectCategory.firstCategoryId
+      // });
+      // yield put({
+      //   type: 'saveSecondCategory',
+      //   payload: second_category_list,
+      // });
     },
 
     * secondCategory({ payload, cb }, { call, put }) {
@@ -67,8 +79,8 @@ export default {
   },
   // 同步
   reducers: {
-    saveFirstCategory(state, action) {
-      return { ...state, first_category_list: action.payload };
+    saveCategory(state, action) {
+      return { ...state, category_list: action.payload };
     },
 
     saveSecondCategory(state, action) {

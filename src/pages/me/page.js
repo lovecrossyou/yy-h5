@@ -29,6 +29,8 @@ const ShopHeader = () => {
 
 
 function Me(props) {
+
+  console.log('global ',props.global);
   return <DocumentTitle title='我'>
     <div>
       <ShopHeader/>
@@ -48,4 +50,8 @@ function Me(props) {
   </DocumentTitle>;
 }
 
-export default connect()(Me);
+export default connect(state=>{
+  return {
+    global:state.global
+  }
+})(Me);

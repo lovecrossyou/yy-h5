@@ -1,21 +1,31 @@
+import uploadFile from '../utils/qiniu';
+import { routerRedux } from 'dva/router';
+import { getAccessToken } from '../utils/authority';
+
 export default {
   namespace: "global",
   state: {
     text: "",
-    accessInfo:null,
+    tokenInfo:null,
     loading:false
   },
 
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname, query, search }) => {
-        console.log('global accessInfo ',query.accessInfo);
-        const accessInfo = query.accessInfo ;
-        if(accessInfo){
-          dispatch({
-            type:'saveAccessInfo',
-            payload:accessInfo
-          });
+        console.log('pathname ',pathname);
+        if(pathname === '/'){
+          const tokenInfo = getAccessToken();
+          console.log('tokenInfo ',tokenInfo)
+          if(tokenInfo===''){
+            dispatch(routerRedux.push('/login/page'));
+          }
+          else {
+            dispatch({
+              type:'saveToken',
+              payload: tokenInfo
+            })
+          }
         }
         dispatch({
           type: "fetch"
@@ -24,15 +34,8 @@ export default {
     }
   },
   reducers: {
-    save(state, action) {
-      return { ...state, ...action.payload };
-    },
-
-    saveAccessInfo(state,{payload}){
-      return {
-        ...state,
-        accessInfo:payload
-      }
+    saveToken(state, action) {
+      return { ...state, tokenInfo:action.payload };
     },
 
     setText(state, { payload }) {
@@ -46,5 +49,13 @@ export default {
     *setTitle({ payload }, { call, put, select }) {
       yield put({ type: "save", payload: payload });
     },
+
+    // 上传图片
+    *upload({ payload, cb }, { call, put, select }) {
+      const res = yield uploadFile(payload,progress=>{
+        console.log('progress ',progress)
+      });
+      // cb&&cb(res);
+    }
   }
 };

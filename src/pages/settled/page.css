@@ -41,9 +41,13 @@
 
 .search_wrapper{
   position: absolute;
-  top: 20px;
-  width: 90%;
-  left: 5%;
+  top: 0px;
+  width: 100%;
+  height: 74px;
+  background-color: #FFFFFF;
+  padding-top: 20px;
+  box-sizing: border-box;
+  /*left: 5%;*/
 }
 
 .center_wrapper{
@@ -70,7 +74,7 @@
 
 .map_wrapper{
   width: 100%;
-  height: 300px;
+  height: 0px;
   position: fixed;
   top: 0;
   left: 0;
@@ -78,7 +82,7 @@
 }
 
 .address_wrapper{
-  margin-top: 300px;
+  margin-top: 80px;
   width: 100%;
   background-color:#FFFFFF;
   overflow-y:scroll;
@@ -97,15 +101,23 @@
 }
 
 .addr_title{
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: #333333;
+
+  display: -webkit-box !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 
 .addr_sub_title{
   font-size: 12px;
   font-weight: bold;
   color: #999999;
+  margin-top: 5px;
 }
 
 .footer_wrapper{
@@ -197,4 +209,20 @@
   font-size: 14px;
   padding: 30px 0 18px 0;
   margin-left: 15px;
+}
+
+
+.am-textarea-control>textarea{
+  color: #999999;
+  width: 668px;
+  height:200px;
+  background-color: #f3f3f3;
+  font-size: 30px;
+}
+.am-textarea-control{
+  color: #999999;
+  width: 668px;
+  height:200px;
+  background-color: #f3f3f3;
+  font-size: 30px;
 }

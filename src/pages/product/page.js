@@ -34,24 +34,37 @@ class ProductEdit extends React.Component {
 
   handleClick = () => {
     this.inputRef.focus();
+
+    //
+    // "headName": "分类2商品",
+    //   "price": 1000,
+    //   "originalPrice": 20000,
+    //   "tag": "标签",
+    //   "spec": "规格 18L",
+    //   "brand": "品牌",
+    //   "productDescribe": "商品描述",
+    //   "categoryId": 2,
+    //   "listImage": "2222",
+    //   "headImage": "23232",
   };
 
   render() {
     const { getFieldProps } = this.props.form;
     const { type } = this.state;
+    const {activeCategory,productDescribe} = this.props.store;
     return (
       <DocumentTitle title='商品'>
 
         <div>
           <List>
             <InputItem
-              {...getFieldProps('pName')}
+              {...getFieldProps('headName')}
               clear
               placeholder="商品名称"
               ref={el => this.autoFocusInst = el}
             >商品名称</InputItem>
             <InputItem
-              {...getFieldProps('originPrice')}
+              {...getFieldProps('originalPrice')}
               type={type}
               placeholder="商品原价"
               clear
@@ -59,7 +72,7 @@ class ProductEdit extends React.Component {
               moneyKeyboardWrapProps={moneyKeyboardWrapProps}
             >原价</InputItem>
             <InputItem
-              {...getFieldProps('salePrice')}
+              {...getFieldProps('price')}
               type={type}
               placeholder="商品售价"
               clear
@@ -68,9 +81,9 @@ class ProductEdit extends React.Component {
             >现价</InputItem>
 
             <InputItem
-              {...getFieldProps('autofocus')}
+              {...getFieldProps('spec')}
               clear
-              placeholder=""
+              placeholder="规格 18L"
               ref={el => this.autoFocusInst = el}
             >商品规格</InputItem>
 
@@ -84,7 +97,7 @@ class ProductEdit extends React.Component {
             >库存</InputItem>
 
             <Item
-              extra=""
+              extra={activeCategory?activeCategory.name:''}
               arrow="horizontal"
               onClick={() => {
                 this.props.dispatch(routerRedux.push('/product/productcategory'));
@@ -92,7 +105,7 @@ class ProductEdit extends React.Component {
             >商品分类</Item>
 
             <Item
-              extra=""
+              extra={productDescribe?productDescribe:''}
               arrow="horizontal"
               onClick={() => {
                 this.props.dispatch(routerRedux.push('/product/productsummary'));
@@ -121,4 +134,9 @@ class ProductEdit extends React.Component {
 }
 
 const ProductEditWrapper = createForm()(ProductEdit);
-export default connect()(ProductEditWrapper);
+
+export default connect(state=>{
+  return {
+    store:state.product
+  }
+})(ProductEditWrapper);

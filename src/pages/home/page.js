@@ -15,8 +15,10 @@ const tabs = [
 ];
 
 
-const ShopHeader = () => {
-  return <div className={styles.shop_header}>
+const ShopHeader = ({onClick}) => {
+  return <div
+    className={styles.shop_header}
+    onClick={onClick}>
     <div className={styles.flex_row}>
       <img alt="" className={styles.avatar}/>
 
@@ -63,7 +65,11 @@ const DeliveryList = ({onClick}) => {
 function Home(props) {
   return <DocumentTitle title='首页'>
     <div>
-      <ShopHeader/>
+      <ShopHeader
+        onClick={()=>{
+          props.dispatch(routerRedux.push('/shop/page'))
+        }}
+      />
       <DeliveryList
         onClick={order=>{
           props.dispatch(routerRedux.push('/order/page'))

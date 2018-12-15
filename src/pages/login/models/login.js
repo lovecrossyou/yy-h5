@@ -1,10 +1,12 @@
+import { Toast} from 'antd-mobile';
 
-import * as loginService from '../services/login'
+import { fetchLogin } from '../services/login';
+import { setAccessToken } from '../../../utils/authority';
+
 export default {
     namespace: 'login',
     state: {
-        text: 'page work',
-        list: []
+
     },
     subscriptions: {
         setup({ dispatch, history }) {
@@ -23,31 +25,18 @@ export default {
         }
     },
     effects: {
-        *fetch({ payload }, { call, put }) {
-            yield put({
-                type: 'save', payload: {
-                        text: 'page init'
-                    }
-            });
-        },
-        *delete({ payload }, { call, put }) {
-            yield put({
-                type: 'save', payload: {
-                        list: []
-                }
-            });
-        },
-        *update({ payload }, { call, put, select }) {
-            const data = yield call(loginService.query, payload);
-            if (data) {
-                yield put({
-                    type: 'save',
-                    payload: {
-                        list: data.data
-                    },
-                })
+        *login({ payload,cb }, { call, put }) {
+            const res = yield call(fetchLogin,payload);
+            if(res.status === '-1'){
+              Toast.show(res.message);
             }
-        }
+            else {
+              //保存用户信息
+              setAccessToken(res.data);
+              cb&&cb();
+            }
+        },
+
     },
     reducers: {
         save(state, action) {

@@ -3,9 +3,10 @@
  */
 import React from 'react';
 import { connect } from 'dva';
-import { List, InputItem, WhiteSpace, Button } from 'antd-mobile';
+import { List, InputItem, Toast, Button } from 'antd-mobile';
 import { createForm } from 'rc-form';
-import * as routerRedux from 'react-router-redux';
+import { routerRedux } from 'dva/router';
+
 import DocumentTitle from 'react-document-title';
 
 import styles from './page.css';
@@ -33,25 +34,43 @@ class ProductEdit extends React.Component {
   }
 
   handleClick = () => {
-    this.inputRef.focus();
+    this.props.form.validateFields((error, value) => {
+      const {name,sortValue} = value ;
+
+      if(name==undefined||name==''){
+        Toast.show('请输入分类名称')
+        return;
+      }
+      if(sortValue==undefined){
+        value.sortVal = 1 ;
+      }
+      console.log(error, value);
+      this.props.dispatch({
+        type:'product/categoryCreate',
+        payload:value,
+        cb:()=>{
+          this.props.dispatch(routerRedux.goBack());
+        }
+      })
+    });
   };
+
 
   render() {
     const { getFieldProps } = this.props.form;
     const { type } = this.state;
     return (
       <DocumentTitle title='添加分类'>
-
         <div>
           <List>
             <InputItem
-              {...getFieldProps('cName')}
+              {...getFieldProps('name')}
               clear
               placeholder="请填写分类名称"
               ref={el => this.autoFocusInst = el}
             >分类名称</InputItem>
             <InputItem
-              {...getFieldProps('sort')}
+              {...getFieldProps('sortVal')}
               type={type}
               placeholder="请填写数字（选填）"
               clear
@@ -61,7 +80,7 @@ class ProductEdit extends React.Component {
           </List>
 
           <div className={styles.footer_btn}>
-            <Button type="primary" onClick={this.confirmClick}>完成</Button>
+            <Button type="primary" onClick={this.handleClick}>完成</Button>
           </div>
         </div>
       </DocumentTitle>

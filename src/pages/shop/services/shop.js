@@ -1,7 +1,8 @@
 import request from "../../../utils/request";
 
-export async function query (params) {
-  return request('/mp/simple/client/adList',{
-    method:'get',
+export async function queryShopInfo (params) {
+  return request('/merchant/shop/info',{
+    method:'post',
+    body:params
   });
 }
