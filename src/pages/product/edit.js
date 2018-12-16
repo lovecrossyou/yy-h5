@@ -54,7 +54,7 @@ class ProductEdit extends React.Component {
     console.log('store ',this.props.store);
     console.log('formData ',formData);
 
-    const {headName,price,originalPrice,spec,volume} = formData ;
+    const {headName,price,originalPrice,spec,stock} = formData ;
     if(headName=== null){
       Toast.show('请输入商品名称');
       return ;
@@ -74,7 +74,7 @@ class ProductEdit extends React.Component {
       return ;
     }
 
-    if(volume=== null){
+    if(stock=== null){
       Toast.show('请输入商品库存');
       return ;
     }
@@ -183,17 +183,16 @@ class ProductEdit extends React.Component {
             >商品规格</InputItem>
 
             <InputItem
-              {...getFieldProps('volume',{rules: [{required: true}],
+              {...getFieldProps('stock',{rules: [{required: true}],
                 onChange:v=>{
-                  // console.log('商品名称 ',v);
                   that.saveFormData({
-                    volume: v
+                    stock: v
                   });
                 }})}
               type={type}
               placeholder="商品库存总量"
               clear
-              defaultValue={formData.volume}
+              defaultValue={formData.stock}
               moneyKeyboardAlign="left"
               moneyKeyboardWrapProps={moneyKeyboardWrapProps}
             >库存</InputItem>

@@ -4,6 +4,7 @@ import {connect} from "dva";
 import {Icon, Tabs,Badge} from 'antd-mobile';
 import DocumentTitle from 'react-document-title';
 import { routerRedux } from 'dva/router';
+import router from 'umi/router';
 
 import styles from './page.less'
 import {DeliveryOrderItem} from "./components/DeliveryOrderItem";
@@ -67,7 +68,8 @@ function Home(props) {
     <div>
       <ShopHeader
         onClick={()=>{
-          props.dispatch(routerRedux.push('/shop/page'))
+          router.push('/shop/page');
+          // props.dispatch(routerRedux.push('/shop/page'))
         }}
       />
       <DeliveryList

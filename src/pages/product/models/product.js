@@ -13,7 +13,7 @@ export default {
       price:null,
       originalPrice:null,
       spec:null,
-      volume:null
+      stock:null
     },
     productImageUrls:[]
   },

@@ -2,6 +2,7 @@ import { NavBar, Icon } from "antd-mobile";
 import { connect } from "dva";
 import router from "umi/router";
 import withRouter from "umi/withRouter";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import styles from './index.css';
 
@@ -39,3 +40,12 @@ function mapStateToProps(state) {
 }
 
 export default withRouter(connect(mapStateToProps)(BasicLayout));
+
+// export default withRouter(
+//   ({ location }) =>
+//     <TransitionGroup>
+//       <CSSTransition key={location.pathname} classNames="fade" timeout={300}>
+//         { children }
+//       </CSSTransition>
+//     </TransitionGroup>
+// )

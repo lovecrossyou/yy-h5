@@ -88,7 +88,7 @@ function Manager(props) {
         <MgrItem
           item={ProductMgr}
           onClick={()=>{
-            props.dispatch(routerRedux.push('/product/page'))
+            props.dispatch(routerRedux.push('/classify/page'))
           }}/>
         <MgrItem item={SaleMgr}/>
       </div>
