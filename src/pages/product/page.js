@@ -63,6 +63,8 @@ class ProductEdit extends React.Component {
       Toast.show('请输入商品价格');
       return ;
     }
+
+
     if(originalPrice=== null){
       Toast.show('请输入商品原价');
       return ;
@@ -88,8 +90,12 @@ class ProductEdit extends React.Component {
       return ;
     }
 
-    formData.listImage = productImageUrls ;
+    formData.price = parseFloat(formData.price)*100 ;
+    formData.originalPrice = parseFloat(formData.originalPrice)*100 ;
+
+    formData.listImage = productImageUrls[0] ;
     formData.headImage = productImageUrls[0] ;
+    formData.detailImages = productImageUrls ;
     formData.categoryId = activeCategory.id ;
     formData.tag = '测试标签' ;
 
@@ -97,7 +103,10 @@ class ProductEdit extends React.Component {
     console.log('formData ',formData);
     this.props.dispatch({
       type:'product/createProduct',
-      payload: formData
+      payload: formData,
+      cb:()=>{
+        this.props.dispatch(routerRedux.goBack());
+      }
     })
 
     //

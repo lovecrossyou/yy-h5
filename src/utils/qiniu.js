@@ -8,7 +8,6 @@ const config = {
 const putExtra = {
   fname: '',
   params: {},
-  mimeLimit: 'image/*',
 };
 
 const qiniuUploadTokenURL = '/simple/client/getUploadFileToken';

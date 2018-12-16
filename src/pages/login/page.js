@@ -22,10 +22,6 @@ class MobileLogin extends React.Component {
     this.totalSec = TOTALSEC ;
   }
 
-  componentDidMount() {
-    this.autoFocusInst.focus();
-  }
-
 
   // 提交
   handleClick = () => {
@@ -54,7 +50,7 @@ class MobileLogin extends React.Component {
               {...getFieldProps('password')}
               clear
               type="password"
-              placeholder="****"
+              placeholder="请输入密码"
               ref={el => this.autoFocusInst = el}
             >密码</InputItem>
 

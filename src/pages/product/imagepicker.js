@@ -9,12 +9,12 @@ class ImagePickerWrapper extends React.Component {
     files: [],
   }
   onChange = (files, type, index) => {
-    console.log(files, type, index);
+    // return;
     if(type === 'add'){
       //上传图片
       this.props.dispatch({
         type:'global/upload',
-        payload:files[0],
+        payload:files[0].file,
         cb:imgUrl=>{
           console.log('imgData ',imgUrl )
           this.props.dispatch({

@@ -6,7 +6,7 @@ export default {
   namespace: 'classify',
   state: {
     category_list:[],
-    products:[],
+    category_products:[]
   },
   subscriptions: {
     setup({ dispatch, history }) {
@@ -16,15 +16,6 @@ export default {
           dispatch({
             type: 'categoryList',
             payload: {},
-          });
-        }
-        else if(pathname === '/classify/classify_detail'){
-          const {id} = query ;
-          dispatch({
-            type: 'productOfCategory',
-            payload: {
-              secondCategoryId:id
-            },
           });
         }
       });
@@ -37,38 +28,33 @@ export default {
         return state.global;
       });
       const shopId = global.tokenInfo.shopId ;
-      const res = yield call(fetchCategoryList, {
+      let res = yield call(fetchCategoryList, {
         id:shopId
       });
       if(res.status === '-1'){
         Toast.show(res.message);
         return;
       }
+
+      // 左侧分类数据
       yield put({
         type: 'saveCategory',
         payload: res.data,
       });
 
-      //继续请求第一个分类的内容
-      // const selectCategory = list[0];
-      // const second_category_list = yield call(fetchSecondCategory, {
-      //   firstCategoryId:selectCategory.firstCategoryId
-      // });
-      // yield put({
-      //   type: 'saveSecondCategory',
-      //   payload: second_category_list,
-      // });
-    },
 
-
-    * productOfCategory({ payload, cb }, { call, put }) {
-      const res = yield call(productOfCategory, payload);
+      // 右侧数据
+      res = yield call(productOfCategory,{
+        id:shopId
+      })
       if(res.status === '-1'){
         Toast.show(res.message);
         return;
       }
+
+      console.log('右侧数据 ',res);
       yield put({
-        type: 'saveProducts',
+        type: 'saveCategoryProducts',
         payload: res.data,
       });
     },
@@ -76,13 +62,15 @@ export default {
   // 同步
   reducers: {
     saveCategory(state, action) {
-      return { ...state, category_list: action.payload };
-    },
-
-    saveProducts(state,action){
       return {
         ...state,
-        products:action.payload
+        category_list: action.payload };
+    },
+
+    saveCategoryProducts(state,action){
+      return {
+        ...state,
+        category_products:action.payload
       }
     }
   },
