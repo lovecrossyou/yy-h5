@@ -1,7 +1,10 @@
 import React from 'react'
 
 import { connect } from "dva";
-import { ImagePicker, WingBlank } from 'antd-mobile';
+import { ImagePicker, WingBlank,Button } from 'antd-mobile';
+import DocumentTitle from 'react-document-title';
+import styles from './page.css';
+import { routerRedux } from 'dva/router';
 
 
 class ImagePickerWrapper extends React.Component {
@@ -39,19 +42,27 @@ class ImagePickerWrapper extends React.Component {
     }
   }
 
+  handleClick = ()=>{
+    this.props.dispatch(routerRedux.goBack());
+  }
 
   render() {
     const { files } = this.state;
     return (
-      <WingBlank>
-        <ImagePicker
-          files={files}
-          onChange={this.onChange}
-          onImageClick={(index, fs) => console.log(index, fs)}
-          selectable={files.length < 9}
-          multiple={false}
-        />
-      </WingBlank>
+      <DocumentTitle title='上传图片'>
+        <WingBlank>
+          <ImagePicker
+            files={files}
+            onChange={this.onChange}
+            onImageClick={(index, fs) => console.log(index, fs)}
+            selectable={files.length < 9}
+            multiple={false}
+          />
+          <div className={styles.footer_btn}>
+            <Button type="primary" onClick={this.handleClick}>完成</Button>
+          </div>
+        </WingBlank>
+      </DocumentTitle>
     );
   }
 }

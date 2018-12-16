@@ -2,17 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { routerRedux } from 'dva/router';
 import DocumentTitle from 'react-document-title';
+import {Button} from 'antd-mobile';
 
 import styles from './page.css';
 import icon_edit from './images/icon_edit.png'
 
-const RightContent = ({ datas, index }) => {
+const RightContent = ({ datas, index,editClick }) => {
   if (datas.length <= index) return null;
   return (
     <div className={styles.classify_content_wrap}>
       {
         datas[index].products.map((data, index) => {
-          return <div className={styles.classify_shop} key={index+'#'}>
+          return <div
+            className={styles.classify_shop}
+            key={index+'#'}
+            onClick={()=>{
+              editClick(data);
+            }}>
             <div className={styles.classify_left_wrapper}>
               <img src={data.headImage} alt="" className={styles.classify_shop_img}/>
               <div className={styles.classify_info}>
@@ -44,6 +50,15 @@ class Classify extends Component {
     });
   }
 
+  editClick = p =>{
+    console.log('p ',p);
+    this.props.dispatch({
+      type:'product/saveFormData',
+      payload:p
+    })
+    this.props.dispatch(routerRedux.push('/product/edit?id='+p.id))
+  }
+
   render() {
     const { category_list, category_products } = this.props.store;
     return (
@@ -60,9 +75,15 @@ class Classify extends Component {
               }
             </li>
             <RightContent
+              editClick={this.editClick}
               datas={category_products}
               index={this.state.needIndex}/>
           </ul>
+          <div className={styles.footer_btn}>
+            <Button type="primary" onClick={()=>{
+              this.props.dispatch(routerRedux.push('/product/page'))
+            }}>添加商品</Button>
+          </div>
         </div>
       </DocumentTitle>
     );

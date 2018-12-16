@@ -113,11 +113,10 @@ class ProductEdit extends React.Component {
     const { type } = this.state;
     const {activeCategory,formData} = this.props.store;
 
-
     let that = this ;
     console.log('formData ',formData);
     return (
-      <DocumentTitle title='商品'>
+      <DocumentTitle title='编辑商品'>
         <div>
           <List>
             <InputItem

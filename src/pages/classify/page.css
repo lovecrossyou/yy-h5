@@ -137,3 +137,10 @@
   width: 100%;
   text-align: center;
 }
+
+.footer_btn{
+  position: fixed;
+  bottom: 10px;
+  left: 12px;
+  right: 12px;
+}

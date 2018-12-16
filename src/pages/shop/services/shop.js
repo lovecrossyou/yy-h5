@@ -6,3 +6,12 @@ export async function queryShopInfo (params) {
     body:params
   });
 }
+
+//
+
+export async function queryUserList (params) {
+  return request('/merchant/shop/user/list',{
+    method:'post',
+    body:params
+  });
+}
