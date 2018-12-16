@@ -38,9 +38,15 @@ function ProductSummary(props) {
                   Toast.show('请输入描述信息')
                   return;
                 }
+
+                const formData = props.store.formData ;
+                const data = {
+                  ...formData,
+                  productDescribe:productDescribe
+                }
                 props.dispatch({
-                  type:'product/saveSummary',
-                  payload:productDescribe
+                  type:'product/saveFormData',
+                  payload:data
                 })
                 props.dispatch(routerRedux.goBack());
               });
@@ -53,4 +59,8 @@ function ProductSummary(props) {
 
 const ProductSummaryWrapper = createForm()(ProductSummary);
 
-export default connect()(ProductSummaryWrapper)
+export default connect(state=>{
+  return {
+    store:state.product
+  }
+})(ProductSummaryWrapper)

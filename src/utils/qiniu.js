@@ -3,27 +3,27 @@ import request from './request';
 const qiniu = require('qiniu-js');
 const config = {
   useCdnDomain: true,
-  region: qiniu.region.z1 //华北
+  region: qiniu.region.z1, //华北
 };
 const putExtra = {
-  fname: "",
+  fname: '',
   params: {},
-  mimeType: [] || null
+  mimeLimit: 'image/*',
 };
 
 const qiniuUploadTokenURL = '/simple/client/getUploadFileToken';
-const qiniuImageURLPrefix = 'http://qnimage.xiteng.com/' ;
+const qiniuImageURLPrefix = 'http://static.tuexing.com/';
 
 const getUploadToken = async () => {
   return request(qiniuUploadTokenURL, {
     method: 'get',
-  }, 'text')
-}
+  }, 'text');
+};
 
-const uploadFile = async (file,progress={}) => {
-  const fileName = 'image_' + new Date().getTime()+ Math.ceil(Math.random(1000)) ;
+const uploadFile = async (file, progress = {}) => {
+  const fileName = 'image_' + new Date().getTime() + Math.ceil(Math.random(1000));
   const token = await getUploadToken();
-  return new Promise((resolve,rej)=>{
+  return new Promise((resolve, rej) => {
     const observable = qiniu.upload(file, fileName, token, putExtra, config);
     const observer = {
       next(res) {
@@ -33,16 +33,16 @@ const uploadFile = async (file,progress={}) => {
         rej(err);
       },
       complete(res) {
-        const {hash,key} = res ;
+        const { hash, key } = res;
         resolve(qiniuImageURLPrefix + key);
-      }
-    }
-    const subscription = observable.subscribe(observer) // 这样传参形式也可以
+      },
+    };
+    const subscription = observable.subscribe(observer); // 这样传参形式也可以
     // subscription.unsubscribe() // 上传取消
 
-  })
-}
+  });
+};
 
 
-module.exports = uploadFile
+module.exports = uploadFile;
 

@@ -1,13 +1,12 @@
 import { Toast} from 'antd-mobile';
 
-import { fetchCategoryList ,fetchSecondCategory,productOfSecondCategory} from '../service/classify';
+import { fetchCategoryList ,fetchSecondCategory,productOfCategory} from '../service/classify';
 
 export default {
   namespace: 'classify',
   state: {
     category_list:[],
-    second_category_list:[],
-    productOfSecondCategory:[],
+    products:[],
   },
   subscriptions: {
     setup({ dispatch, history }) {
@@ -20,11 +19,11 @@ export default {
           });
         }
         else if(pathname === '/classify/classify_detail'){
-          const {categoryId} = query ;
+          const {id} = query ;
           dispatch({
-            type: 'productOfSecondCategory',
+            type: 'productOfCategory',
             payload: {
-              secondCategoryId:categoryId
+              secondCategoryId:id
             },
           });
         }
@@ -61,19 +60,16 @@ export default {
       // });
     },
 
-    * secondCategory({ payload, cb }, { call, put }) {
-      const userData = yield call(fetchSecondCategory, payload);
-      yield put({
-        type: 'saveSecondCategory',
-        payload: userData,
-      });
-    },
 
-    * productOfSecondCategory({ payload, cb }, { call, put }) {
-      const products = yield call(productOfSecondCategory, payload);
+    * productOfCategory({ payload, cb }, { call, put }) {
+      const res = yield call(productOfCategory, payload);
+      if(res.status === '-1'){
+        Toast.show(res.message);
+        return;
+      }
       yield put({
         type: 'saveProducts',
-        payload: products,
+        payload: res.data,
       });
     },
   },
@@ -83,14 +79,10 @@ export default {
       return { ...state, category_list: action.payload };
     },
 
-    saveSecondCategory(state, action) {
-      return { ...state, second_category_list: action.payload };
-    },
-
     saveProducts(state,action){
       return {
         ...state,
-        productOfSecondCategory:action.payload
+        products:action.payload
       }
     }
   },

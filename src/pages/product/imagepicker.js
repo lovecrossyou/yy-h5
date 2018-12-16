@@ -1,18 +1,42 @@
 import React from 'react'
+
 import { connect } from "dva";
 import { ImagePicker, WingBlank } from 'antd-mobile';
 
-const data = [];
 
 class ImagePickerWrapper extends React.Component {
   state = {
-    files: data,
+    files: [],
   }
   onChange = (files, type, index) => {
     console.log(files, type, index);
-    this.setState({
-      files,
-    });
+    if(type === 'add'){
+      //上传图片
+      this.props.dispatch({
+        type:'global/upload',
+        payload:files[0],
+        cb:imgUrl=>{
+          console.log('imgData ',imgUrl )
+          this.props.dispatch({
+            type:'product/saveProductImageUrl',
+            payload: imgUrl
+          });
+          this.setState({
+            files
+          });
+        }
+      })
+    }
+    else if(type === 'remove'){
+      this.setState({
+        files
+      });
+      //删除图片
+      this.props.dispatch({
+        type:'product/removeImageUrl',
+        payload:index
+      })
+    }
   }
 
 

@@ -7,7 +7,15 @@ export default {
   state: {
     category_list:[],
     activeCategory:null,
-    productDescribe:null
+    // 上传商品的参数
+    formData:{
+      headName:null,
+      price:null,
+      originalPrice:null,
+      spec:null,
+      volume:null
+    },
+    productImageUrls:[]
   },
   subscriptions: {
     setup({ dispatch, history }) {
@@ -86,8 +94,27 @@ export default {
       return { ...state, activeCategory: action.payload };
     },
 
-    saveSummary(state, action) {
-      return { ...state, productDescribe: action.payload };
+
+    saveFormData(state, action) {
+      return { ...state, formData: action.payload };
     },
+
+    saveProductImageUrl(state, action) {
+      const imgUrl = action.payload ;
+      let imgUrls = state.productImageUrls ;
+      imgUrls.push(imgUrl);
+
+      console.log('imgUrls ',imgUrls)
+      return { ...state,
+        productImageUrls: imgUrls };
+    },
+
+    removeImageUrl(state,action){
+      let imgUrls = state.productImageUrls ;
+      const index = parseInt(action.payload) ;
+      imgUrls = imgUrls.slice(index,1);
+      return { ...state,
+        productImageUrls: imgUrls };
+    }
   },
 };

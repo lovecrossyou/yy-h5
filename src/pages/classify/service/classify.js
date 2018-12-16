@@ -14,8 +14,8 @@ export async function fetchSecondCategory(params) {
   });
 }
 
-export async function productOfSecondCategory(params) {
-  return request('/discountProduct/productOfSecondCategory',{
+export async function productOfCategory(params) {
+  return request('/merchant/shop/productListWithCategory',{
     method:'post',
     body:params
   });

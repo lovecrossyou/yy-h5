@@ -55,7 +55,7 @@ export default {
       const res = yield uploadFile(payload,progress=>{
         console.log('progress ',progress)
       });
-      // cb&&cb(res);
+      cb&&cb(res);
     }
   }
 };
