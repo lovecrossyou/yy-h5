@@ -137,6 +137,8 @@ class Settled extends React.Component {
 
   render() {
     const {getFieldProps} = this.props.form;
+
+    const {productImageUrls} = this.props.store;
     return (
       <DocumentTitle title='入驻'>
         <div>
@@ -207,7 +209,7 @@ class Settled extends React.Component {
             >店铺地址</Item>
 
             <Item
-              extra="去上传"
+              extra={productImageUrls.length===0?'去上传':'已上传'}
               arrow="horizontal"
               onClick={() => {
                 router.push('/settled/imagepicker');

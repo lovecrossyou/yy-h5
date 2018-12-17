@@ -21,7 +21,7 @@ class ImagePickerWrapper extends React.Component {
         cb:imgUrl=>{
           console.log('imgData ',imgUrl )
           this.props.dispatch({
-            type:'product/saveProductImageUrl',
+            type:'settled/saveProductImageUrl',
             payload: imgUrl
           });
           this.setState({
@@ -36,7 +36,7 @@ class ImagePickerWrapper extends React.Component {
       });
       //删除图片
       this.props.dispatch({
-        type:'product/removeImageUrl',
+        type:'settled/removeImageUrl',
         payload:index
       })
     }
