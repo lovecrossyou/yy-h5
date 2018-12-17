@@ -4,7 +4,6 @@
 
 import React from 'react';
 import {connect} from 'dva';
-import {List, InputItem, WhiteSpace, Button} from 'antd-mobile';
 import {createForm} from 'rc-form';
 import router from 'umi/router';
 import DocumentTitle from 'react-document-title';

@@ -4,7 +4,7 @@ import { connect } from "dva";
 import { ImagePicker, WingBlank,Button } from 'antd-mobile';
 import DocumentTitle from 'react-document-title';
 import styles from './page.css';
-import { routerRedux } from 'dva/router';
+import router from 'umi/router';
 
 
 class ImagePickerWrapper extends React.Component {
@@ -43,7 +43,7 @@ class ImagePickerWrapper extends React.Component {
   }
 
   handleClick = ()=>{
-    this.props.dispatch(routerRedux.goBack());
+    router.goBack();
   }
 
   render() {

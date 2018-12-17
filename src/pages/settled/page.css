@@ -226,3 +226,10 @@
   background-color: #f3f3f3;
   font-size: 30px;
 }
+
+.footer_btn{
+  position: fixed;
+  bottom: 10px;
+  left: 12px;
+  right: 12px;
+}

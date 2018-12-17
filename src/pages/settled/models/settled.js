@@ -11,7 +11,8 @@ export default {
   state: {
     addrList:[],
     //店铺入驻参数
-    shopParamInfo:{}
+    shopParamInfo:{},
+    productImageUrls:[]
   },
   subscriptions: {
     setup({ dispatch, history }) {
@@ -72,6 +73,23 @@ export default {
           imageUrl: action.payload
         }
       }
+    },
+    saveProductImageUrl(state, action) {
+      const imgUrl = action.payload ;
+      let imgUrls = state.productImageUrls ;
+      imgUrls.push(imgUrl);
+
+      console.log('imgUrls ',imgUrls)
+      return { ...state,
+        productImageUrls: imgUrls };
+    },
+
+    removeImageUrl(state,action){
+      let imgUrls = state.productImageUrls ;
+      const index = parseInt(action.payload) ;
+      imgUrls = imgUrls.slice(index,1);
+      return { ...state,
+        productImageUrls: imgUrls };
     }
   },
 };
