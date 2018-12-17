@@ -22,9 +22,8 @@ const roleData = [{
 class OperatorEdit extends React.Component {
 
   state = {
-    roleName: 'simple_manager',
     avatar: null,
-    roleName: null
+    roleName: ['shop_manager']
   }
 
   handleClick = () => {
@@ -36,7 +35,7 @@ class OperatorEdit extends React.Component {
       }
 
       const avatar = this.state.avatar ;
-      const rolename = this.state.roleName ;
+      const rolename = this.state.roleName[0] ;
 
       value.mobilePhone = value.mobilePhone.replace(/\s+/g,"") ;
 
@@ -55,6 +54,13 @@ class OperatorEdit extends React.Component {
         }
       })
     });
+  }
+
+  onChangeRole = v=>{
+    console.log(v);
+    this.setState({
+      roleName:v
+    })
   }
 
   render() {
@@ -78,11 +84,8 @@ class OperatorEdit extends React.Component {
         <Picker
           data={roleData}
           cols={1}
-          onOk={v => {
-            this.setState({
-              roleName: v[0]
-            })
-          }}
+          value={this.state.roleName}
+          onChange={this.onChangeRole.bind(this)}
         >
           <List.Item arrow="horizontal">角色</List.Item>
         </Picker>

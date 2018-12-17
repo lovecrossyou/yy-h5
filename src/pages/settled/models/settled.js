@@ -3,7 +3,6 @@
  */
 import { Toast} from 'antd-mobile';
 import { fetchCreateShop } from '../services/settle';
-import uploadFile from '../../../utils/qiniu' ;
 import { fetchPlace } from '../../../utils/map';
 
 export default {
@@ -11,7 +10,9 @@ export default {
   state: {
     addrList:[],
     //店铺入驻参数
-    shopParamInfo:{},
+    shopParamInfo:{
+      locationInfo:{}
+    },
     productImageUrls:[]
   },
   subscriptions: {
@@ -64,16 +65,6 @@ export default {
       }
     },
 
-    // 保存店铺头像
-    saveImageUrl(state,action){
-      return {
-        ...state,
-        shopParamInfo: {
-          ...state.shopParamInfo,
-          imageUrl: action.payload
-        }
-      }
-    },
     saveProductImageUrl(state, action) {
       const imgUrl = action.payload ;
       let imgUrls = state.productImageUrls ;
@@ -90,6 +81,24 @@ export default {
       imgUrls = imgUrls.slice(index,1);
       return { ...state,
         productImageUrls: imgUrls };
+    },
+
+    saveLocationInfo(state,action){
+      let shopParamInfo = state.shopParamInfo ;
+      return {
+        ...state,
+        shopParamInfo:{
+          ...shopParamInfo,
+          locationInfo:action.payload
+        }
+      }
+    },
+
+    saveShopParamInfo(state,action){
+      return {
+        ...state,
+        shopParamInfo:action.payload
+      }
     }
   },
 };

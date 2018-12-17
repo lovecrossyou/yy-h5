@@ -4,6 +4,7 @@
 import { connect } from 'dva';
 import { Icon ,List} from 'antd-mobile';
 import DocumentTitle from 'react-document-title';
+import router from 'umi/router';
 
 import styles from './page.less';
 
@@ -43,7 +44,9 @@ function Me(props) {
         <Item
           thumb={setting_img}
           arrow="horizontal"
-          onClick={() => {}}
+          onClick={() => {
+            router.push('/me/setting')
+          }}
         >设置</Item>
       </List>
     </div>

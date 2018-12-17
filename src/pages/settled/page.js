@@ -29,25 +29,30 @@ class Settled extends React.Component {
     shopType:null,
     logo:null
   };
+
   onChange = (files, type, index) => {
     console.log(files, type, index);
     this.setState({
       file: files[0],
     });
   };
+
   handleClick = () => {
     this.inputRef.focus();
-  }
+  };
+
 
   confirmClick = () => {
-    const {name,shopType,imageUrl,presentation,shopDetailImage,locationInfo,telephone,adminName,adminMobilePhone} = this.shopParamInfo ;
+    let {shopParamInfo,productImageUrls} = this.props.store ;
+
+    const {name,shopType,imageUrl,presentation,locationInfo,telephone,adminName,adminMobilePhone} = shopParamInfo ;
 
     console.log('shopParamInfo ',this.shopParamInfo);
+
     if(shopType === undefined){
       Toast.show('请选择店铺类型');
       return;
     }
-
     if(name === undefined){
       Toast.show('请输入店铺名称');
       return;
@@ -55,6 +60,11 @@ class Settled extends React.Component {
 
     if(imageUrl === undefined){
       Toast.show('请上传店铺logo');
+      return;
+    }
+
+    if(productImageUrls.length === 0){
+      Toast.show('请上传店铺环境');
       return;
     }
 
@@ -81,64 +91,62 @@ class Settled extends React.Component {
       return;
     }
 
-
     if(presentation === undefined){
       Toast.show('请输入店铺介绍');
       return;
     }
+    let shopParams = Object.assign({},shopParamInfo) ;
+    shopParams.adminMobilePhone = shopParams.adminMobilePhone.replace(/\s+/g,"");
+    shopParams.telephone = shopParams.telephone.replace(/\s+/g,"");
+    shopParams.shopType = shopParams.shopType[0] ;
+    console.log('shopParams ',shopParams);
+    this.props.dispatch({
+      type: 'settled/createShop',
+      payload: shopParams,
+      cb: () => {
+        router.push('/settled/applyresult')
+      }
+    })
+  }
 
-    this.props.form.validateFields((error, value) => {
-      console.log('error ', error)
-      console.log('value ', value)
-
-      return;
-      this.props.dispatch({
-        type: 'settled/createShop',
-        payload: {
-          "name": "第一个店铺",
-          "shopType": "convenience_store",
-          "imageUrl": "http://img3.duitang.com/uploads/item/201511/14/20151114125146_LXHzE.jpeg",
-          "presentation": "店铺介绍",
-          "shopDetailImage": ["11111", "22222"],
-          "locationInfo": {
-            "longitude": 34.991231,
-            "latitude": 113.091231,
-            "addressName": "小测试地址名称"
-          },
-          "telephone": "18610824157",
-          "adminName": "我是店长",
-          "adminMobilePhone": "18610824157"
-        },
-        cb: () => {
-          this.props.dispatch(routerRedux.push('/settled/applyresult'));
-        }
-      })
+  componentDidMount() {
+    let {shopParamInfo} = this.props.store ;
+    this.props.form.setFieldsValue({
+      name:shopParamInfo.name,
+      imageUrl:shopParamInfo.imageUrl,
+      telephone:shopParamInfo.telephone,
+      adminName:shopParamInfo.adminName,
+      adminMobilePhone:shopParamInfo.adminMobilePhone,
+      presentation:shopParamInfo.presentation,
     })
   }
 
   setParam = p => {
-    this.shopParamInfo = {
-      ...this.shopParamInfo,
+    let shopParamInfo = this.props.store.shopParamInfo ;
+    console.log('shopParamInfo ',shopParamInfo)
+
+    let paramInfo = {
+      ...shopParamInfo,
       ...p
     }
+    console.log('paramInfo ',paramInfo)
+    this.props.dispatch({
+      type:'settled/saveShopParamInfo',
+      payload:paramInfo
+    })
   }
 
   // 设置店铺类型
   onChangeShopType = v=>{
     this.setParam({
-      shopType:v[0]
-    })
-    console.log('onChangeShopType ',v);
-
-    this.setState({
       shopType:v
     })
+    console.log('onChangeShopType ',v);
   }
 
   render() {
     const {getFieldProps} = this.props.form;
-
-    const {productImageUrls} = this.props.store;
+    const {productImageUrls,shopParamInfo} = this.props.store;
     return (
       <DocumentTitle title='入驻'>
         <div>
@@ -146,7 +154,7 @@ class Settled extends React.Component {
             <Picker
               data={shopTypeData}
               cols={1}
-              value={this.state.shopType}
+              value={shopParamInfo.shopType}
               onOk={this.onChangeShopType}
             >
               <List.Item arrow="horizontal">店铺类型</List.Item>
@@ -185,23 +193,21 @@ class Settled extends React.Component {
                     type: 'global/upload',
                     payload: files[0],
                     cb: (imgUrl) => {
-                      console.log('imgUrl ',imgUrl)
-                      this.shopParamInfo.imageUrl = imgUrl;
-                      this.setState({
-                        logo:imgUrl
+                      this.setParam({
+                        imageUrl:imgUrl
                       })
                     },
                   });
                 }}
               />
-              <img src={this.state.logo} className={styles.icon_name} alt=""/>
+              <img src={shopParamInfo.imageUrl} className={styles.icon_name} alt=""/>
               <Icon type="right" color='#999999'/>
             </span>
             </div>
             <WhiteSpace/>
 
             <Item
-              extra="请选择地区"
+              extra={shopParamInfo.locationInfo.addressName}
               arrow="horizontal"
               onClick={() => {
                 router.push('/settled/map');
@@ -291,4 +297,8 @@ class Settled extends React.Component {
 
 const SettledWrapper = createForm()(Settled);
 
-export default connect()(SettledWrapper)
+export default connect(state=>{
+  return {
+    store:state.settled
+  }
+})(SettledWrapper)

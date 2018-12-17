@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { connect } from "dva";
-import { routerRedux } from 'dva/router';
+import router from 'umi/router';
 import {List, InputItem, WhiteSpace, SearchBar, WingBlank, Icon} from 'antd-mobile';
 import styles from './page.css'
 
@@ -42,8 +42,25 @@ class MapPage extends React.Component {
   }
 
   onClick = addr=>{
-    console.log('addr ',addr)
-    this.props.dispatch(routerRedux.goBack());
+    const addressName = addr.name + addr.address ;
+    const location =  addr.location ;
+    let longitude = ''
+    let latitude = ''
+    if(location){
+      longitude = location.split(',')[0];
+      latitude = location.split(',')[1];
+    }
+    const locationInfo = {
+      addressName,
+      longitude,
+      latitude
+    }
+    console.log('locationInfo ',locationInfo)
+    this.props.dispatch({
+      type:'settled/saveLocationInfo',
+      payload: locationInfo
+    })
+    router.goBack();
   }
 
   render() {

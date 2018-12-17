@@ -8,3 +8,8 @@ export function setAccessToken(authority) {
     return localStorage.setItem('accessToken', JSON.stringify(authority));
   }
 }
+
+export function removeToken() {
+  localStorage.clear();
+}
+
