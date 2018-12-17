@@ -15,3 +15,12 @@ export async function queryUserList (params) {
     body:params
   });
 }
+
+//
+export async function queryUserCreate (params) {
+  return request('/merchant/shop/user/create',{
+    method:'post',
+    body:params
+  });
+}
+

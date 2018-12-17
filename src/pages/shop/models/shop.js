@@ -1,4 +1,5 @@
-import { queryShopInfo, queryUserList } from '../services/shop';
+import { Toast} from 'antd-mobile';
+import {queryShopInfo, queryUserCreate, queryUserList} from '../services/shop';
 
 export default {
   namespace: 'shop',
@@ -52,6 +53,22 @@ export default {
         type: 'saveUserList',
         payload: res.data
       })
+    },
+
+    * userCreate({payload,cb},{call,put,select}){
+      const global = yield select(state => {
+        return state.global;
+      });
+      const res = yield call(queryUserCreate, {
+        ...payload,
+        shopId: global.tokenInfo.shopId
+      });
+
+      if(res.status === '-1'){
+        Toast.show(res.message);
+        return;
+      }
+      cb&&cb();
     }
   },
   reducers: {
@@ -62,4 +79,4 @@ export default {
       return { ...state, userList:action.payload };
     },
   },
-};        
+};

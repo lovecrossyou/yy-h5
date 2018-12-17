@@ -24,7 +24,7 @@ const RightContent = ({ datas, index,editClick }) => {
               <div className={styles.classify_info}>
                 <div className={styles.classify_left_title}>{data.headName}</div>
                 <div className={styles.classify_left_wrapper}>
-                  <div className={styles.classify_left_price}>¥{data.price}</div>
+                  <div className={styles.classify_left_price}>¥{data.price/100}</div>
                   <div className={styles.classify_left_stock}>库存x1</div>
                 </div>
               </div>

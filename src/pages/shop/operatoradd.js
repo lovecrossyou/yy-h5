@@ -59,7 +59,7 @@ class OperatorEdit extends React.Component {
 
   render() {
     const {getFieldProps} = this.props.form;
-    return <DocumentTitle title='角色编辑'>
+    return <DocumentTitle title='角色添加'>
       <List renderHeader={() => ''}>
         <InputItem
           {...getFieldProps('cnName', {rules: [{required: true}]})}
@@ -116,7 +116,7 @@ class OperatorEdit extends React.Component {
               });
             }}
           />
-          <img className={styles.icon_name} alt=""/>
+          <img src={this.state.avatar} className={styles.icon_name} alt=""/>
           <img className={styles.icon_name_left} src={icon_left} alt=""/>
       </span>
         </div>

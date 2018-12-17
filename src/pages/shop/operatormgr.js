@@ -2,7 +2,7 @@
  * Created by zhulizhe on 2018-12-12.
  */
 import React from 'react';
-import { routerRedux } from 'dva/router';
+import router from 'umi/router';
 import {connect} from 'dva';
 import DocumentTitle from 'react-document-title';
 
@@ -25,7 +25,7 @@ function OperatorMgr(props) {
                 arrow="horizontal"
                 extra={user.roleContent}
                 onClick={() => {
-                  props.dispatch(routerRedux.push('/shop/operatoredit'))
+                  router.push('/shop/operatoredit')
                 }}
               >{user.cnName}</Item>
             )
@@ -34,7 +34,11 @@ function OperatorMgr(props) {
       </List>
 
       <div className={styles.btn_confirm}>
-        <Button type="primary" >添加</Button>
+        <Button
+          type="primary"
+          onClick={()=>{
+            router.push('/shop/operatoradd')
+          }}>添加</Button>
       </div>
     </div>
   </DocumentTitle>

@@ -55,7 +55,7 @@ export default {
     *upload({ payload, cb }, { call, put, select }) {
       const res = yield uploadFile(payload,progress=>{
         console.log('progress ',progress)
-        Toast.loading(progress.total.percent + '%',0);
+        Toast.loading(progress.total.percent.toFixed(2) + '%',0);
       });
       Toast.hide();
       cb&&cb(res);
