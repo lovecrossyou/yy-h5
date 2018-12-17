@@ -21,7 +21,7 @@ function OperatorMgr(props) {
             return (
               <Item
                 key={index+'#'}
-                thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
+                thumb={user.icon}
                 arrow="horizontal"
                 extra={user.roleContent}
                 onClick={() => {

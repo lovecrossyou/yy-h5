@@ -15,11 +15,11 @@ export default {
   ],
   theme: './config/theme.config.js',
   proxy: {
-    "/api": {
+    "/h5": {
       target: "http://47.94.209.108:7002/",
       changeOrigin: true,
       secure: false,
-      pathRewrite: { "^/api" : "" }
+      pathRewrite: { "^/h5" : "" }
     },
   },
 }

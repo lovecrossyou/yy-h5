@@ -3,10 +3,10 @@
  */
 
 import React from 'react';
-import { connect } from 'dva';
-import { List, InputItem, WhiteSpace, Button } from 'antd-mobile';
-import { createForm } from 'rc-form';
-import { routerRedux } from 'dva/router';
+import {connect} from 'dva';
+import {List, InputItem, WhiteSpace, Button} from 'antd-mobile';
+import {createForm} from 'rc-form';
+import router from 'umi/router';
 import DocumentTitle from 'react-document-title';
 
 import styles from './page.css';
@@ -22,50 +22,50 @@ import quan from './images/quan@2x.png'
 import tixian from './images/tixian@2x.png'
 
 
-const LabelMgr ={
-  img:label_icon,
-  label:'分类管理'
+const LabelMgr = {
+  img: label_icon,
+  label: '分类管理'
 }
 
-const ProductMgr ={
-  img:shangpingouwudai,
-  label:'商品管理'
+const ProductMgr = {
+  img: shangpingouwudai,
+  label: '商品管理'
 }
 
-const SaleMgr ={
-  img:yunyingshang,
-  label:'营销管理'
+const SaleMgr = {
+  img: yunyingshang,
+  label: '营销管理'
 }
 
-const OperatorMgr ={
-  img:yuangongguanli,
-  label:'员工管理'
-}
-
-
-const OrderMgr ={
-  img:dingdan,
-  label:'订单管理'
-}
-
-const ShopMgr ={
-  img:dianpu,
-  label:'店铺管理'
-}
-
-const TicketMgr ={
-  img:quan,
-  label:'水票管理'
-}
-
-const WithdrawMgr ={
-  img:tixian,
-  label:'提现管理'
+const OperatorMgr = {
+  img: yuangongguanli,
+  label: '员工管理'
 }
 
 
-const MgrItem = ({item=null,onClick})=>{
-  if(item==null){
+const OrderMgr = {
+  img: dingdan,
+  label: '订单管理'
+}
+
+const ShopMgr = {
+  img: dianpu,
+  label: '店铺管理'
+}
+
+const TicketMgr = {
+  img: quan,
+  label: '水票管理'
+}
+
+const WithdrawMgr = {
+  img: tixian,
+  label: '提现管理'
+}
+
+
+const MgrItem = ({item = null, onClick}) => {
+  if (item == null) {
     return <div className={styles.mgr_item_empty}>
     </div>
   }
@@ -82,13 +82,13 @@ function Manager(props) {
       <div className={styles.mgr_row}>
         <MgrItem
           item={LabelMgr}
-          onClick={()=>{
-            props.dispatch(routerRedux.push('/product/productcategory'))
+          onClick={() => {
+            router.push('/product/productcategory')
           }}/>
         <MgrItem
           item={ProductMgr}
-          onClick={()=>{
-            props.dispatch(routerRedux.push('/classify/page'))
+          onClick={() => {
+            router.push('/classify/page')
           }}/>
         <MgrItem item={SaleMgr}/>
       </div>
@@ -96,8 +96,8 @@ function Manager(props) {
       <div className={styles.mgr_row}>
         <MgrItem
           item={OperatorMgr}
-          onClick={()=>{
-            props.dispatch(routerRedux.push('/shop/operatormgr'))
+          onClick={() => {
+            router.push('/shop/operatormgr')
           }}/>
         <MgrItem item={OrderMgr}/>
         <MgrItem item={ShopMgr}/>
@@ -105,8 +105,12 @@ function Manager(props) {
 
       <div className={styles.mgr_row}>
         <MgrItem item={TicketMgr}/>
-        <MgrItem item={WithdrawMgr}/>
-        <MgrItem />
+        <MgrItem item={WithdrawMgr}
+           onClick={() => {
+             router.push('/withdraw/page')
+           }}
+        />
+        <MgrItem/>
       </div>
     </div>
   </DocumentTitle>

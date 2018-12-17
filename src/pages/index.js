@@ -1,18 +1,15 @@
 import React from 'react';
+import { connect } from 'dva';
 
 import {TabBar} from 'antd-mobile';
-
 import Home from '../pages/home/page'
-// import Home from './Index/page'
-
 import Manager from './manage/page'
 import Me from './me/page'
 
-export default class Index extends React.Component {
+class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'HomeTab',
       hidden: false,
       fullScreen: false,
     };
@@ -46,7 +43,17 @@ export default class Index extends React.Component {
     );
   }
 
+  switchTab = tabName =>{
+    console.log('tabName ',tabName)
+    this.props.dispatch({
+      type:'global/saveTabName',
+      payload:tabName
+    })
+  }
+
   render() {
+    const {selectedTab} = this.props.store ;
+    console.log('selectedTab ',selectedTab)
     return (
       <div style={{position: 'fixed', height: '100%', width: '100%'}}>
         <TabBar
@@ -72,13 +79,9 @@ export default class Index extends React.Component {
             }}
             />
             }
-            selected={this.state.selectedTab === 'HomeTab'}
+            selected={selectedTab === 'HomeTab'}
             badge={1}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'HomeTab',
-              });
-            }}
+            onPress={this.switchTab.bind(this,'HomeTab')}
             data-seed="logId"
           >
             <Home/>
@@ -102,12 +105,8 @@ export default class Index extends React.Component {
             }
             title="管理"
             key="Manager"
-            selected={this.state.selectedTab === 'ManagerTab'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'ManagerTab',
-              });
-            }}
+            selected={selectedTab === 'ManagerTab'}
+            onPress={this.switchTab.bind(this,'ManagerTab')}
             data-seed="logId1"
           >
             <Manager/>
@@ -131,12 +130,8 @@ export default class Index extends React.Component {
             }
             title="我的"
             key="Mine"
-            selected={this.state.selectedTab === 'MineTab'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'MineTab',
-              });
-            }}
+            selected={selectedTab === 'MineTab'}
+            onPress={this.switchTab.bind(this,'MineTab')}
           >
             <Me/>
           </TabBar.Item>
@@ -146,3 +141,9 @@ export default class Index extends React.Component {
   }
 }
 
+
+export default connect(state=>{
+  return {
+    store:state.global
+  }
+})(Index)
