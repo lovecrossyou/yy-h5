@@ -22,9 +22,8 @@ const roleData = [{
 class OperatorEdit extends React.Component {
 
   state = {
-    roleName: 'simple_manager',
     avatar: null,
-    roleName: null
+    roleName: ['shop_manager']
   }
 
   handleClick = () => {
@@ -36,7 +35,7 @@ class OperatorEdit extends React.Component {
       }
 
       const avatar = this.state.avatar ;
-      const rolename = this.state.roleName ;
+      const rolename = this.state.roleName[0] ;
 
       value.mobilePhone = value.mobilePhone.replace(/\s+/g,"") ;
 
@@ -46,6 +45,7 @@ class OperatorEdit extends React.Component {
         icon:avatar
       }
 
+      Toast.show('',0);
       this.props.dispatch({
         type:'shop/userCreate',
         payload:params,
@@ -57,9 +57,16 @@ class OperatorEdit extends React.Component {
     });
   }
 
+  onChangeRole = v=>{
+    console.log(v);
+    this.setState({
+      roleName:v
+    })
+  }
+
   render() {
     const {getFieldProps} = this.props.form;
-    return <DocumentTitle title='角色添加'>
+    return <DocumentTitle title='角色编辑'>
       <List renderHeader={() => ''}>
         <InputItem
           {...getFieldProps('cnName', {rules: [{required: true}]})}
@@ -78,11 +85,8 @@ class OperatorEdit extends React.Component {
         <Picker
           data={roleData}
           cols={1}
-          onOk={v => {
-            this.setState({
-              roleName: v[0]
-            })
-          }}
+          value={this.state.roleName}
+          onChange={this.onChangeRole.bind(this)}
         >
           <List.Item arrow="horizontal">角色</List.Item>
         </Picker>
@@ -116,7 +120,7 @@ class OperatorEdit extends React.Component {
               });
             }}
           />
-          <img src={this.state.avatar} className={styles.icon_name} alt=""/>
+          <img className={styles.icon_name} alt=""/>
           <img className={styles.icon_name_left} src={icon_left} alt=""/>
       </span>
         </div>

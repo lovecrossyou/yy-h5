@@ -73,7 +73,6 @@ class Login extends React.Component{
 
   // 登录
   loginClick = params=>{
-    console.log('login params ',params);
     let username = params.username ;
     if(username==undefined){
       Toast.show('请输入用户名')
@@ -86,6 +85,7 @@ class Login extends React.Component{
       Toast.show('请输入密码')
       return;
     }
+    Toast.loading('登录中',0);
     this.props.dispatch({
       type:'login/login',
       payload:{
@@ -93,6 +93,7 @@ class Login extends React.Component{
         password:password
       },
       cb:()=>{
+        Toast.hide();
         this.props.dispatch(routerRedux.replace('/'));
       }
     })

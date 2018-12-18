@@ -44,11 +44,12 @@ class ProductEdit extends React.Component {
       if(sortValue==undefined){
         value.sortVal = 1 ;
       }
-      console.log(error, value);
+      Toast.loading('',0);
       this.props.dispatch({
         type:'product/categoryCreate',
         payload:value,
         cb:()=>{
+          Toast.hide();
           this.props.dispatch(routerRedux.goBack());
         }
       })

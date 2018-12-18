@@ -61,9 +61,9 @@ export default {
 
     // 上传图片
     * upload({payload, cb}, {call, put, select}) {
+      Toast.loading('上传中',0);
       const res = yield uploadFile(payload, progress => {
         console.log('progress ', progress)
-        Toast.loading(progress.total.percent.toFixed(2) + '%', 0);
       });
       Toast.hide();
       cb && cb(res);

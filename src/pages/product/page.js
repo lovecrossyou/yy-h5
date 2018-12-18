@@ -99,10 +99,12 @@ class ProductEdit extends React.Component {
     formData.tag = '测试标签' ;
 
     console.log('formData ',formData);
+    Toast.loading('',0);
     this.props.dispatch({
       type:'product/createProduct',
       payload: formData,
       cb:()=>{
+        Toast.hide();
         this.props.dispatch(routerRedux.goBack());
       }
     })
