@@ -27,7 +27,14 @@ function BasicLayout(props) {
       >
         {props.text}
       </NavBar>
-      {props.children}
+
+      <TransitionGroup>
+        <CSSTransition key={props.pathname} classNames="fade" timeout={300}>
+          {props.children}
+        </CSSTransition>
+      </TransitionGroup>
+
+
     </div>
   );
 }
@@ -40,12 +47,3 @@ function mapStateToProps(state) {
 }
 
 export default withRouter(connect(mapStateToProps)(BasicLayout));
-
-// export default withRouter(
-//   ({ location }) =>
-//     <TransitionGroup>
-//       <CSSTransition key={location.pathname} classNames="fade" timeout={300}>
-//         { children }
-//       </CSSTransition>
-//     </TransitionGroup>
-// )
