@@ -45,6 +45,7 @@ class OperatorEdit extends React.Component {
         icon:avatar
       }
 
+      Toast.show('',0);
       this.props.dispatch({
         type:'shop/userCreate',
         payload:params,
@@ -65,7 +66,7 @@ class OperatorEdit extends React.Component {
 
   render() {
     const {getFieldProps} = this.props.form;
-    return <DocumentTitle title='角色添加'>
+    return <DocumentTitle title='角色编辑'>
       <List renderHeader={() => ''}>
         <InputItem
           {...getFieldProps('cnName', {rules: [{required: true}]})}

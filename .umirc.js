@@ -4,6 +4,7 @@ export default {
     android: 6,
     ios: 7,
   },
+  outputPath:'../yy-server-h5/views',
   publicPath:'./',
   base:'/yy/',
   plugins: [

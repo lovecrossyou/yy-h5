@@ -5,6 +5,7 @@
 import React from 'react';
 import { routerRedux } from 'dva/router';
 import { connect } from 'dva';
+import DocumentTitle from 'react-document-title';
 
 import { List, InputItem, WhiteSpace, Button, WingBlank, ImagePicker, Icon } from 'antd-mobile';
 import { createForm } from 'rc-form';
@@ -17,7 +18,7 @@ function DoWithDraw(props) {
   const { getFieldProps } = props.form;
 
 
-  return <div>
+  return <DocumentTitle title='提现'>
     <List>
     <div className={styles.withdraw_header}>
       <div className={styles.withdraw_content_title}>到账银行卡</div>
@@ -62,7 +63,7 @@ function DoWithDraw(props) {
       </div>
     </div>
     </List>
-  </div>;
+  </DocumentTitle>;
 }
 
 

@@ -31,7 +31,7 @@ function Setting(props) {
           Toast.show('已注销当前账户')
           router.replace('/')
         }}
-      >注销</Item>
+      >退出登录</Item>
     </List>
   </DocumentTitle>
 }
