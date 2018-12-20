@@ -1,4 +1,10 @@
 
+.nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .normal {
   font-family: Georgia, sans-serif;
   text-align: center;

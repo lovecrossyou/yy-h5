@@ -1,6 +1,7 @@
 import uploadFile from '../utils/qiniu';
 import {routerRedux} from 'dva/router';
 import {getAccessToken} from '../utils/authority';
+import {Toast} from 'antd-mobile';
 
 export default {
   namespace: "global",
@@ -61,6 +62,7 @@ export default {
       const res = yield uploadFile(payload, progress => {
         console.log('progress ', progress)
       });
+      Toast.hide();
       cb && cb(res);
     },
   }

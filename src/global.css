@@ -24,3 +24,7 @@ body {
 .global_container{
   margin-top: 42px;
 }
+
+.am-navbar-left{
+  padding-left: 0;
+}
