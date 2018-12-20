@@ -1,17 +1,20 @@
-import { Toast} from 'antd-mobile';
-import {queryShopInfo, queryUserCreate, queryUserList} from '../services/shop';
+import {Toast} from 'antd-mobile';
+import {queryShopInfo, queryUpdateShop, queryUserCreate, queryUserList} from '../services/shop';
+import {getShopTye} from "../../../utils/config";
 
 export default {
   namespace: 'shop',
   state: {
-    shopInfo:{
-
+    userList: [],
+    //店铺入驻参数
+    shopParamInfo: {
+      locationInfo: {}
     },
-    userList:[]
+    productImageUrls: []
   },
   subscriptions: {
-    setup({ dispatch, history }) {
-      return history.listen(({ pathname, query }) => {
+    setup({dispatch, history}) {
+      return history.listen(({pathname, query}) => {
         if (pathname === '/shop/page') {
           dispatch({
             type: 'fetch',
@@ -20,7 +23,7 @@ export default {
             type: 'global/setTitle', payload: '店铺详情',
           });
         }
-        else if(pathname=== '/shop/operatormgr'){
+        else if (pathname === '/shop/operatormgr') {
           dispatch({
             type: 'userList',
           });
@@ -32,20 +35,37 @@ export default {
     },
   },
   effects: {
-    * fetch({ payload }, { call, put,select }) {
+    * fetch({payload}, {call, put, select}) {
       const global = yield select(state => {
         return state.global;
       });
-      const res = yield call(queryShopInfo,{
-        sn:global.tokenInfo.shopSn
+      const res = yield call(queryShopInfo, {
+        sn: global.tokenInfo.shopSn
       });
       yield put({
-        type:'saveShopInfo',
-        payload:res.data
+        type: 'saveShopInfo',
+        payload: res.data
       })
     },
 
-    * userList({ payload }, { call, put,select }) {
+    * update({payload,cb}, {call, put, select}) {
+
+      const global = yield select(state => {
+        return state.global;
+      });
+
+      const res = yield call(queryUpdateShop,{
+        ...payload,
+        id: global.tokenInfo.shopId
+      }) ;
+      if (res.status === '-1') {
+        Toast.show(res.message);
+        return;
+      }
+      cb && cb();
+    },
+
+    * userList({payload}, {call, put, select}) {
       const global = yield select(state => {
         return state.global;
       });
@@ -58,7 +78,7 @@ export default {
       })
     },
 
-    * userCreate({payload,cb},{call,put,select}){
+    * userCreate({payload, cb}, {call, put, select}) {
       const global = yield select(state => {
         return state.global;
       });
@@ -67,19 +87,87 @@ export default {
         shopId: global.tokenInfo.shopId
       });
 
-      if(res.status === '-1'){
+      if (res.status === '-1') {
         Toast.show(res.message);
         return;
       }
-      cb&&cb();
+      cb && cb();
     }
   },
   reducers: {
     saveShopInfo(state, action) {
-      return { ...state, shopInfo:action.payload };
+      // name:shopParamInfo.name,
+      //   imageUrl:shopParamInfo.imageUrl,
+      //   telephone:shopParamInfo.telephone,
+      //   adminName:shopParamInfo.adminName,
+      //   adminMobilePhone:shopParamInfo.adminMobilePhone,
+      //   presentation:shopParamInfo.presentation,
+
+      const shopTypeName = getShopTye(action.payload.shopType);
+      return {
+        ...state,
+        shopParamInfo: {
+          ...state.shopParamInfo,
+          ...action.payload,
+          shopType: [shopTypeName]
+        }
+      };
     },
     saveUserList(state, action) {
-      return { ...state, userList:action.payload };
+      return {...state, userList: action.payload};
     },
+
+
+    saveProductImageUrl(state, action) {
+      let shopParamInfo = state.shopParamInfo;
+
+      const imgUrl = action.payload;
+      let imgUrls = state.productImageUrls;
+      imgUrls.push(imgUrl);
+      // shopDetailImage
+      console.log('imgUrls ', imgUrls)
+      return {
+        ...state,
+        productImageUrls: imgUrls,
+        shopParamInfo: {
+          ...shopParamInfo,
+          shopDetailImage: imgUrls
+        }
+      };
+    },
+
+    removeImageUrl(state, action) {
+      let shopParamInfo = state.shopParamInfo;
+      let imgUrls = state.productImageUrls;
+      const index = parseInt(action.payload);
+      imgUrls = imgUrls.slice(index, 1);
+      return {
+        ...state,
+        productImageUrls: imgUrls,
+        shopParamInfo: {
+          ...shopParamInfo,
+          shopDetailImage: imgUrls
+        }
+      };
+    },
+
+    saveLocationInfo(state, action) {
+      let shopParamInfo = state.shopParamInfo;
+      return {
+        ...state,
+        shopParamInfo: {
+          ...shopParamInfo,
+          locationInfo: action.payload
+        }
+      }
+    },
+
+    saveShopParamInfo(state, action) {
+      return {
+        ...state,
+        shopParamInfo: action.payload
+      }
+    }
   },
+
 };

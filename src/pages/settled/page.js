@@ -6,16 +6,10 @@ import DocumentTitle from 'react-document-title';
 import {List, InputItem, WhiteSpace, Button, TextareaItem, Radio, Icon,Toast,Picker} from 'antd-mobile';
 import {createForm} from 'rc-form';
 import styles from './page.css'
+import {shopTypeData} from "../../utils/config";
 
 const Item = List.Item;
 
-const shopTypeData = [{
-  label: '水站',
-  value: 'water_store'
-}, {
-  label: '便利店',
-  value: 'convenience_store'
-}]
 
 class Settled extends React.Component {
 

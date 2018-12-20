@@ -64,11 +64,11 @@ const DeliveryList = ({onClick}) => {
 
 
 function Home(props) {
-  const {shopInfo} = props.store ;
+  const {shopParamInfo} = props.store ;
   return <DocumentTitle title='首页'>
     <div>
       <ShopHeader
-        shopInfo={shopInfo}
+        shopInfo={shopParamInfo}
         onClick={()=>{
           router.push('/shop/page');
           // props.dispatch(routerRedux.push('/shop/page'))

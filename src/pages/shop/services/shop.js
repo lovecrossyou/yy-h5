@@ -24,3 +24,11 @@ export async function queryUserCreate (params) {
   });
 }
 
+export async function queryUpdateShop (params) {
+  return request('/merchant/shop/update',{
+    method:'post',
+    body:params
+  });
+}
+
+
