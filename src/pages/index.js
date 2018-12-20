@@ -43,11 +43,23 @@ class Index extends React.Component {
     );
   }
 
+  getTabNameString = tab=>{
+    if(tab === 'HomeTab')return '首页' ;
+    if(tab === 'ManagerTab')return '管理' ;
+    if(tab === 'MineTab')return '我' ;
+    return '' ;
+  }
+
   switchTab = tabName =>{
     console.log('tabName ',tabName)
     this.props.dispatch({
       type:'global/saveTabName',
       payload:tabName
+    })
+
+    this.props.dispatch({
+      type:'global/setText',
+      payload:this.getTabNameString(tabName)
     })
   }
 

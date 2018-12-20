@@ -29,26 +29,26 @@ class OperatorEdit extends React.Component {
   handleClick = () => {
     this.props.form.validateFields((error, value) => {
       console.log(error, value);
-      if(error){
+      if (error) {
         Toast.show('请输入完整信息')
         return;
       }
 
-      const avatar = this.state.avatar ;
-      const rolename = this.state.roleName[0] ;
+      const avatar = this.state.avatar;
+      const rolename = this.state.roleName[0];
 
-      value.mobilePhone = value.mobilePhone.replace(/\s+/g,"") ;
+      value.mobilePhone = value.mobilePhone.replace(/\s+/g, "");
 
       const params = {
         ...value,
-        shopUserRole:rolename,
-        icon:avatar
+        shopUserRole: rolename,
+        icon: avatar
       }
 
       this.props.dispatch({
-        type:'shop/userCreate',
-        payload:params,
-        cb:()=>{
+        type: 'shop/userCreate',
+        payload: params,
+        cb: () => {
           Toast.show('添加成功')
           router.goBack();
         }
@@ -56,47 +56,48 @@ class OperatorEdit extends React.Component {
     });
   }
 
-  onChangeRole = v=>{
+  onChangeRole = v => {
     console.log(v);
     this.setState({
-      roleName:v
+      roleName: v
     })
   }
 
   render() {
     const {getFieldProps} = this.props.form;
     return <DocumentTitle title='角色编辑'>
-      <List renderHeader={() => ''}>
-        <InputItem
-          {...getFieldProps('cnName', {rules: [{required: true}]})}
-          placeholder="请输入昵称"
-        >昵称</InputItem>
-        <InputItem
-          {...getFieldProps('mobilePhone',{rules: [{required: true}]})}
-          type="phone"
-          placeholder="请输入手机号"
-        >账号</InputItem>
-        <InputItem
-          {...getFieldProps('password',{rules: [{required: true}]})}
-          type="password"
-          placeholder="请输入密码"
-        >密码</InputItem>
-        <Picker
-          data={roleData}
-          cols={1}
-          value={this.state.roleName}
-          onChange={this.onChangeRole.bind(this)}
-        >
-          <List.Item arrow="horizontal">角色</List.Item>
-        </Picker>
+      <div className='global_container'>
+        <List renderHeader={() => ''}>
+          <InputItem
+            {...getFieldProps('cnName', {rules: [{required: true}]})}
+            placeholder="请输入昵称"
+          >昵称</InputItem>
+          <InputItem
+            {...getFieldProps('mobilePhone', {rules: [{required: true}]})}
+            type="phone"
+            placeholder="请输入手机号"
+          >账号</InputItem>
+          <InputItem
+            {...getFieldProps('password', {rules: [{required: true}]})}
+            type="password"
+            placeholder="请输入密码"
+          >密码</InputItem>
+          <Picker
+            data={roleData}
+            cols={1}
+            value={this.state.roleName}
+            onChange={this.onChangeRole.bind(this)}
+          >
+            <List.Item arrow="horizontal">角色</List.Item>
+          </Picker>
 
-        <div
-          className={styles.head_portrait}
-          onClick={() => {
+          <div
+            className={styles.head_portrait}
+            onClick={() => {
 
-          }}>
-          <span>头像</span>
-          <span>
+            }}>
+            <span>头像</span>
+            <span>
           <input
             className={styles.file}
             type="file"
@@ -116,7 +117,7 @@ class OperatorEdit extends React.Component {
                     avatar: url
                   })
                 },
-                progressPercent:data=>{
+                progressPercent: data => {
                   Toast.show(data);
                 }
               });
@@ -125,13 +126,13 @@ class OperatorEdit extends React.Component {
           <img className={styles.icon_name} alt=""/>
           <img className={styles.icon_name_left} src={icon_left} alt=""/>
       </span>
-        </div>
+          </div>
 
-        <div className={styles.btn_confirm}>
-          <Button type="primary" onClick={this.handleClick}>确定</Button>
-        </div>
-
-      </List>
+          <div className={styles.btn_confirm}>
+            <Button type="primary" onClick={this.handleClick}>确定</Button>
+          </div>
+        </List>
+      </div>
     </DocumentTitle>
   }
 }

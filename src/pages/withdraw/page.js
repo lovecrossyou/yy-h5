@@ -12,28 +12,25 @@ import {createForm} from 'rc-form';
 import money_icon from './images/qian@2x.png'
 import styles from './page.css'
 
-const confirmClick = () => {
-
-}
-
 function WithDraw(props) {
-  return <DocumentTitle> <div className='global_container'>
-    <div className={styles.header}>
-      <img src={money_icon} alt="" className={styles.money_icon}/>
-      <div className={styles.remain_amount}>
+  return <DocumentTitle title='提现'>
+    <div className='global_container'>
+      <div className={styles.header}>
+        <img src={money_icon} alt="" className={styles.money_icon}/>
+        <div className={styles.remain_amount}>
           余额
         </div>
         <div className={styles.amount}>
           2553.00
         </div>
       </div>
-    <div className={styles.footer_btn}>
-      <Button
-        type="primary"
-        onClick={() => {
-          props.dispatch(routerRedux.push('/withdraw/withdraw'))
-        }}>提现</Button>
-    </div>
+      <div className={styles.footer_btn}>
+        <Button
+          type="primary"
+          onClick={() => {
+            props.dispatch(routerRedux.push('/withdraw/withdraw'))
+          }}>提现</Button>
+      </div>
     </div>
   </DocumentTitle>
 }

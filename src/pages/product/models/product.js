@@ -26,6 +26,9 @@ export default {
             type: 'categoryList',
             payload: {},
           });
+          dispatch({
+            type: 'global/setTitle', payload:'分类'
+          });
         }
       });
     },

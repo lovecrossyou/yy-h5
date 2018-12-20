@@ -8,7 +8,6 @@ import styles from './index.css';
 
 function BasicLayout(props) {
   // return <div style={{height:'100%'}}> {props.children}</div>;
-
   console.log('BasicLayout ',props.text);
   return (
     <div className={styles.wrapper}>

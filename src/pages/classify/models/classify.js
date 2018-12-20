@@ -17,6 +17,9 @@ export default {
             type: 'categoryList',
             payload: {},
           });
+          dispatch({
+            type: 'global/setTitle', payload:'商品列表'
+          });
         }
       });
     },

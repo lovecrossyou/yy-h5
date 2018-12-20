@@ -22,6 +22,9 @@ export default {
           dispatch({
             type: 'userList',
           });
+          dispatch({
+            type: 'global/setTitle', payload: '员工列表',
+          });
         }
       });
     },

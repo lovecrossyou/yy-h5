@@ -5,7 +5,7 @@ import {getAccessToken} from '../utils/authority';
 export default {
   namespace: "global",
   state: {
-    text: "x",
+    text: "",
     tokenInfo: null,
     loading: false,
     selectedTab: 'HomeTab'
@@ -28,10 +28,6 @@ export default {
             })
           }
         }
-        dispatch({
-          type: "setText",
-          payload:'首页'
-        });
       });
     }
   },
