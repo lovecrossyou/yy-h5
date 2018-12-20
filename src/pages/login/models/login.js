@@ -4,24 +4,6 @@ import { fetchLogin } from '../services/login';
 import { setAccessToken } from '../../../utils/authority';
 
 export default {
-<<<<<<< HEAD
-    namespace: 'login',
-    state: {
-
-    },
-    subscriptions: {
-        setup({ dispatch, history }) {
-            return history.listen(({ pathname, query }) => {
-                if (pathname === '/login') {
-                    dispatch({
-                        type: 'fetch'
-                    })
-                    dispatch({
-                        type:'global/setTitle',payload:'登录'
-                      })
-                }
-            });
-=======
   namespace: 'login',
   state: {},
   subscriptions: {
@@ -32,11 +14,8 @@ export default {
             type: 'fetch',
           });
           dispatch({
-            type: 'global/setTitle', payload: {
-              text: '登录',
-            },
+            type: 'global/setTitle', payload:'登录'
           });
->>>>>>> 4ec0723365c4fb4a880bba5d7d6dff6f34b3e7c4
         }
       });
     },
@@ -58,9 +37,5 @@ export default {
     save(state, action) {
       return { ...state, ...action.payload };
     },
-<<<<<<< HEAD
-};
-=======
   },
-};        
->>>>>>> 4ec0723365c4fb4a880bba5d7d6dff6f34b3e7c4
+};

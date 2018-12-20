@@ -1,29 +1,31 @@
 /**
  * Created by zhulizhe on 2018-12-08.
  */
-import { connect } from 'dva';
-import { Icon ,List} from 'antd-mobile';
+import {connect} from 'dva';
+import {Icon, List} from 'antd-mobile';
 import DocumentTitle from 'react-document-title';
 import router from 'umi/router';
 
 import styles from './page.less';
 
-import record_img  from './images/jiaoyijilu@2x.png'
+import record_img from './images/jiaoyijilu@2x.png'
 import setting_img from './images/settings@2x.png'
 
 const Item = List.Item
 
 const ShopHeader = () => {
-  return <div className={styles.shop_header}>
-    <div className={styles.flex_row}>
-      <img alt="" className={styles.avatar}/>
+  return <div className='global_container'>
+    <div className={styles.shop_header}>
+      <div className={styles.flex_row}>
+        <img alt="" className={styles.avatar}/>
 
-      <div className={styles.shop_info}>
-        <div className={styles.shop_name}>小贝水站</div>
+        <div className={styles.shop_info}>
+          <div className={styles.shop_name}>小贝水站</div>
+        </div>
       </div>
-    </div>
-    <div className={styles.shop_arrow}>
-      <Icon type='right' color='rgba(255,134,56,1)'/>
+      <div className={styles.shop_arrow}>
+        <Icon type='right' color='rgba(255,134,56,1)'/>
+      </div>
     </div>
   </div>;
 };
@@ -31,7 +33,7 @@ const ShopHeader = () => {
 
 function Me(props) {
 
-  console.log('global ',props.global);
+  console.log('global ', props.global);
   return <DocumentTitle title='我'>
     <div>
       <ShopHeader/>
@@ -39,7 +41,8 @@ function Me(props) {
         <Item
           thumb={record_img}
           arrow="horizontal"
-          onClick={() => {}}
+          onClick={() => {
+          }}
         >交易记录</Item>
         <Item
           thumb={setting_img}
@@ -53,8 +56,8 @@ function Me(props) {
   </DocumentTitle>;
 }
 
-export default connect(state=>{
+export default connect(state => {
   return {
-    global:state.global
+    global: state.global
   }
 })(Me);
