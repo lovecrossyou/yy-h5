@@ -4,7 +4,9 @@ import {queryShopInfo, queryUserCreate, queryUserList} from '../services/shop';
 export default {
   namespace: 'shop',
   state: {
-    shopInfo:null,
+    shopInfo:{
+
+    },
     userList:[]
   },
   subscriptions: {
