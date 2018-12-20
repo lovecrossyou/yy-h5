@@ -13,14 +13,14 @@ import setting_img from './images/settings@2x.png'
 
 const Item = List.Item
 
-const ShopHeader = () => {
+const ShopHeader = ({shopInfo}) => {
   return <div className='global_container'>
     <div className={styles.shop_header}>
       <div className={styles.flex_row}>
-        <img alt="" className={styles.avatar}/>
+        <img src={shopInfo.imageUrl} alt="" className={styles.avatar}/>
 
         <div className={styles.shop_info}>
-          <div className={styles.shop_name}>小贝水站</div>
+          <div className={styles.shop_name}>{shopInfo.name}</div>
         </div>
       </div>
       <div className={styles.shop_arrow}>
@@ -36,7 +36,7 @@ function Me(props) {
   console.log('global ', props.global);
   return <DocumentTitle title='我'>
     <div>
-      <ShopHeader/>
+      <ShopHeader shopInfo={props.shop.shopParamInfo}/>
       <List className={styles.items}>
         <Item
           thumb={record_img}
@@ -58,6 +58,7 @@ function Me(props) {
 
 export default connect(state => {
   return {
-    global: state.global
+    global: state.global,
+    shop:state.shop
   }
 })(Me);

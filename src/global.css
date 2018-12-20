@@ -8,7 +8,6 @@ body {
   margin: 0;
 }
 
-
 .fade-enter {
   opacity: 0;
   z-index: 1;
@@ -19,12 +18,14 @@ body {
   transition: opacity 250ms ease-in;
 }
 
-* { touch-action: pan-y; }
+* {
+  touch-action: pan-y;
+}
 
-.global_container{
+.global_container {
   margin-top: 42px;
 }
 
-.am-navbar-left{
+.am-navbar-left {
   padding-left: 0;
 }
