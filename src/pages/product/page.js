@@ -120,7 +120,7 @@ class ProductEdit extends React.Component {
     console.log('formData ',formData);
     return (
       <DocumentTitle title='商品'>
-        <div>
+        <div className='global_container'>
           <List>
             <InputItem
               {...getFieldProps('headName',{
