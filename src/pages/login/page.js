@@ -75,15 +75,15 @@ class Login extends React.Component{
   loginClick = params=>{
     console.log('login params ',params);
     let username = params.username ;
-    if(username==undefined){
-      Toast.show('请输入用户名')
+    if(username===undefined){
+      Toast.show('请输入用户名',1000)
       return;
     }
 
     username = username.replace(/\s+/g,"") ;
     let password = params.password ;
-    if(password==undefined){
-      Toast.show('请输入密码')
+    if(password===undefined){
+      Toast.show('请输入密码',1000)
       return;
     }
     this.props.dispatch({

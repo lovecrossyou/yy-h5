@@ -116,6 +116,9 @@ class OperatorEdit extends React.Component {
                     avatar: url
                   })
                 },
+                progressPercent:data=>{
+                  Toast.show(data);
+                }
               });
             }}
           />

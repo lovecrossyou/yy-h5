@@ -2,7 +2,7 @@
  * Created by zhulizhe on 2018-12-09.
  */
 import React from 'react';
-import { routerRedux } from 'dva/router';
+import {routerRedux} from 'dva/router';
 import {connect} from 'dva';
 
 import {List, InputItem, WhiteSpace, Button, WingBlank, ImagePicker, Icon} from 'antd-mobile';
@@ -11,12 +11,12 @@ import {createForm} from 'rc-form';
 import money_icon from './images/qian@2x.png'
 import styles from './page.css'
 
-const confirmClick = ()=>{
+const confirmClick = () => {
 
 }
 
 function WithDraw(props) {
-  return <div>
+  return <div className='global_container'>
     <div className={styles.header}>
       <img src={money_icon} alt="" className={styles.money_icon}/>
       <div className={styles.remain_amount}>
@@ -29,7 +29,7 @@ function WithDraw(props) {
     <div className={styles.footer_btn}>
       <Button
         type="primary"
-        onClick={()=>{
+        onClick={() => {
           props.dispatch(routerRedux.push('/withdraw/withdraw'))
         }}>提现</Button>
     </div>

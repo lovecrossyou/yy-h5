@@ -8,13 +8,14 @@
 import {connect} from 'dva';
 import DocumentTitle from 'react-document-title';
 import {Button} from 'antd-mobile';
-import { routerRedux } from 'dva/router';
+import {routerRedux} from 'dva/router';
 
 import styles from './page.css'
 import React from 'react';
+import {ActivityIndicator} from "../../components/ActivityIndicator";
 
 
-const CategoryItem = ({label,onClick})=>{
+const CategoryItem = ({label, onClick}) => {
   return <div className={styles.category_item} onClick={onClick}>
     {label}
   </div>
@@ -22,43 +23,45 @@ const CategoryItem = ({label,onClick})=>{
 
 
 function ProductCategory(props) {
-  const {category_list} = props.store ;
+  const {category_list} = props.store;
 
-  console.log('category_list ',category_list)
+  console.log('category_list ', category_list)
   return (
     <DocumentTitle title='商品分类'>
-      <div>
-       <div>
-         {
-           category_list.map((c,index)=>{
-             return (
-               <CategoryItem
-                 onClick={()=>{
-                   props.dispatch({
-                     type:'product/saveActiveCategory',
-                     payload:c
-                   })
-                   props.dispatch(routerRedux.goBack());
-                 }}
-                 label={c.name}
-                 key={index+'#'}/>
-             )
-           })
-         }
-       </div>
+      <div className='global_container'>
+        <div>
+          {
+            category_list.map((c, index) => {
+              return (
+                <CategoryItem
+                  onClick={() => {
+                    props.dispatch({
+                      type: 'product/saveActiveCategory',
+                      payload: c
+                    })
+                    props.dispatch(routerRedux.goBack());
+                  }}
+                  label={c.name}
+                  key={index + '#'}/>
+              )
+            })
+          }
+        </div>
         <div className={styles.footer_btn}>
-          <Button type="primary" onClick={()=>{
+          <Button type="primary" onClick={() => {
             props.dispatch(routerRedux.push('/product/categoryadd'))
           }}>添加</Button>
         </div>
+        <ActivityIndicator animating={props.loading}/>
       </div>
     </DocumentTitle>
   )
 }
 
 
-export default connect(state=>{
+export default connect(state => {
   return {
-    store:state.product
+    store: state.product,
+    loading:state.loading.global
   }
 })(ProductCategory)

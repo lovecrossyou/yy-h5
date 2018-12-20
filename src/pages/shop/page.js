@@ -3,7 +3,7 @@ import { routerRedux } from 'dva/router';
 import {connect} from 'dva';
 import DocumentTitle from 'react-document-title';
 
-import {List, InputItem, WhiteSpace, Button, TextareaItem, Radio, Icon} from 'antd-mobile';
+import {List, InputItem, WhiteSpace, Button, TextareaItem, Radio, Icon,Toast} from 'antd-mobile';
 import {createForm} from 'rc-form';
 import styles from './page.css'
 
@@ -88,7 +88,7 @@ class ShopDetail extends React.Component {
     const {getFieldProps} = this.props.form;
     return (
       <DocumentTitle title='入驻'>
-        <div>
+        <div className='global_container'>
           <List>
             <InputItem
               {...getFieldProps('name')}
@@ -123,6 +123,9 @@ class ShopDetail extends React.Component {
                         payload:imgUrl
                       });
                     },
+                    progressPercent:data=>{
+                      Toast.show(data);
+                    }
                   });
 
                 }}

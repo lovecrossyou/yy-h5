@@ -61,7 +61,7 @@ class ProductEdit extends React.Component {
     const { type } = this.state;
     return (
       <DocumentTitle title='添加分类'>
-        <div>
+        <div className='global_container'>
           <List>
             <InputItem
               {...getFieldProps('name')}

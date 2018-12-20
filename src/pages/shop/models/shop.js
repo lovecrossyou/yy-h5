@@ -15,9 +15,7 @@ export default {
             type: 'fetch',
           });
           dispatch({
-            type: 'global/setTitle', payload: {
-              text: '登录',
-            },
+            type: 'global/setTitle', payload: '店铺详情',
           });
         }
         else if(pathname=== '/shop/operatormgr'){

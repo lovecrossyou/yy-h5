@@ -197,6 +197,9 @@ class Settled extends React.Component {
                         imageUrl:imgUrl
                       })
                     },
+                    progressPercent:data=>{
+                      Toast.show(data);
+                    }
                   });
                 }}
               />

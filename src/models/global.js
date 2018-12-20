@@ -1,12 +1,11 @@
 import uploadFile from '../utils/qiniu';
 import {routerRedux} from 'dva/router';
 import {getAccessToken} from '../utils/authority';
-import {Toast} from 'antd-mobile';
 
 export default {
   namespace: "global",
   state: {
-    text: "",
+    text: "x",
     tokenInfo: null,
     loading: false,
     selectedTab: 'HomeTab'
@@ -30,7 +29,8 @@ export default {
           }
         }
         dispatch({
-          type: "fetch"
+          type: "setText",
+          payload:'首页'
         });
       });
     }
@@ -56,16 +56,14 @@ export default {
   },
   effects: {
     * setTitle({payload}, {call, put, select}) {
-      yield put({type: "save", payload: payload});
+      yield put({type: "setText", payload: payload});
     },
 
     // 上传图片
-    * upload({payload, cb}, {call, put, select}) {
+    * upload({payload, cb,progressPercent}, {call, put, select}) {
       const res = yield uploadFile(payload, progress => {
-        console.log('progress ', progress)
-        Toast.loading(progress.total.percent.toFixed(2) + '%', 0);
+        progressPercent&&progressPercent(progress.total.percent.toFixed(2) + '%')
       });
-      Toast.hide();
       cb && cb(res);
     },
 

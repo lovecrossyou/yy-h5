@@ -16,9 +16,7 @@ export default {
                         type: 'fetch'
                     })
                     dispatch({
-                        type:'global/setTitle',payload:{
-                          text:"登录"
-                        }
+                        type:'global/setTitle',payload:'登录'
                       })
                 }
             });
@@ -43,4 +41,4 @@ export default {
             return { ...state, ...action.payload };
         },
     },
-};        
+};

@@ -6,6 +6,7 @@ import {Button} from 'antd-mobile';
 
 import styles from './page.css';
 import icon_edit from './images/icon_edit.png'
+import {ActivityIndicator} from "../../components/ActivityIndicator";
 
 const RightContent = ({ datas, index,editClick }) => {
   if (datas.length <= index) return null;
@@ -63,26 +64,31 @@ class Classify extends Component {
     const { category_list, category_products } = this.props.store;
     return (
       <DocumentTitle title='商品列表'>
-        <div className={styles.warpper}>
-          <ul>
-            <li className={styles.classify_list}>
-              {category_list.map((data, index) => {
-                return (
-                  <span key={index + '#'} onClick={this.handleClick.bind(this, index)}
-                        className={this.state.needIndex == index ? styles.onclick_after : styles.onclick_before}>{data.name}</span>
-                );
-              })
-              }
-            </li>
-            <RightContent
-              editClick={this.editClick}
-              datas={category_products}
-              index={this.state.needIndex}/>
-          </ul>
-          <div className={styles.footer_btn}>
-            <Button type="primary" onClick={()=>{
-              this.props.dispatch(routerRedux.push('/product/page'))
-            }}>添加商品</Button>
+        <div className='global_container'>
+          <div className={styles.warpper}>
+            <ul>
+              <li className={styles.classify_list}>
+                {category_list.map((data, index) => {
+                  return (
+                    <span key={index + '#'} onClick={this.handleClick.bind(this, index)}
+                          className={this.state.needIndex == index ? styles.onclick_after : styles.onclick_before}>{data.name}</span>
+                  );
+                })
+                }
+              </li>
+              <RightContent
+                editClick={this.editClick}
+                datas={category_products}
+                index={this.state.needIndex}/>
+            </ul>
+            <div className={styles.footer_btn}>
+              <Button type="primary" onClick={()=>{
+                this.props.dispatch(routerRedux.push('/product/page'))
+              }}>添加商品</Button>
+            </div>
+
+            <ActivityIndicator animating={this.props.loading}/>
+
           </div>
         </div>
       </DocumentTitle>
@@ -93,5 +99,6 @@ class Classify extends Component {
 export default connect(state => {
   return {
     store: state.classify,
+    loading:state.loading.global
   };
 })(Classify);

@@ -8,13 +8,14 @@ import DocumentTitle from 'react-document-title';
 
 import {List,Button} from 'antd-mobile';
 import styles from './page.css';
+import {ActivityIndicator} from "../../components/ActivityIndicator";
 
 const Item = List.Item;
 
 function OperatorMgr(props) {
   const {userList} = props.store ;
   return <DocumentTitle title='员工管理'>
-    <div>
+    <div className='global_container'>
       <List renderHeader={() => '角色列表'}>
         {
           userList.map((user,index)=>{
@@ -40,12 +41,16 @@ function OperatorMgr(props) {
             router.push('/shop/operatoradd')
           }}>添加</Button>
       </div>
+
+      <ActivityIndicator animating={props.loading}/>
+
     </div>
   </DocumentTitle>
 }
 
 export default connect(state=>{
   return {
-    store:state.shop
+    store:state.shop,
+    loading:state.loading.global
   }
 })(OperatorMgr)

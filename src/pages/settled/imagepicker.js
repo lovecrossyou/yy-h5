@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { connect } from "dva";
-import { ImagePicker, WingBlank,Button } from 'antd-mobile';
+import { ImagePicker, WingBlank,Button,Toast } from 'antd-mobile';
 import DocumentTitle from 'react-document-title';
 import styles from './page.css';
 import router from 'umi/router';
@@ -27,6 +27,9 @@ class ImagePickerWrapper extends React.Component {
           this.setState({
             files
           });
+        },
+        progressPercent:data=>{
+          Toast.show(data);
         }
       })
     }
