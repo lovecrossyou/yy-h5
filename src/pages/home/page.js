@@ -16,15 +16,15 @@ const tabs = [
 ];
 
 
-const ShopHeader = ({onClick}) => {
+const ShopHeader = ({onClick,shopInfo}) => {
   return <div
     className={styles.shop_header}
     onClick={onClick}>
     <div className={styles.flex_row}>
-      <img alt="" className={styles.avatar}/>
+      <img src={shopInfo.imageUrl} alt="" className={styles.avatar}/>
 
       <div className={styles.shop_info}>
-        <div className={styles.shop_name}>小贝水站</div>
+        <div className={styles.shop_name}>{shopInfo.name}</div>
         <div className={styles.shop_sale}>销量：500+</div>
       </div>
     </div>
@@ -64,9 +64,11 @@ const DeliveryList = ({onClick}) => {
 
 
 function Home(props) {
+  const {shopInfo} = props.store ;
   return <DocumentTitle title='首页'>
     <div>
       <ShopHeader
+        shopInfo={shopInfo}
         onClick={()=>{
           router.push('/shop/page');
           // props.dispatch(routerRedux.push('/shop/page'))
@@ -80,4 +82,8 @@ function Home(props) {
   </DocumentTitle>
 }
 
-export default connect()(Home)
+export default connect(state=>{
+  return {
+    store:state.shop
+  }
+})(Home)

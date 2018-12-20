@@ -26,6 +26,12 @@ export default {
             dispatch({
               type: 'saveToken',
               payload: tokenInfo
+            });
+
+            //请求店铺信息
+            dispatch({
+              type:'shop/fetch',
+              payload:{}
             })
           }
         }

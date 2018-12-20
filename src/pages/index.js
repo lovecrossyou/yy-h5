@@ -156,6 +156,7 @@ class Index extends React.Component {
 
 export default connect(state=>{
   return {
-    store:state.global
+    store:state.global,
+    shop:state.shop
   }
 })(Index)
