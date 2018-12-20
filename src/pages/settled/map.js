@@ -75,16 +75,13 @@ class MapPage extends React.Component {
       <div className='global_container'>
         <div className={styles.container}>
           {/*地图*/}
-          <div className={styles.map_wrapper}>
-            {/*搜索框*/}
-            <div className={styles.search_wrapper}>
-              <SearchBar
-                onChange={this.onChange}
-                placeholder="搜索地址"
-                maxLength={8}
-                autoFocus={true}
-                showCancelButton={false}/>
-            </div>
+          <div className={styles.search_wrapper}>
+            <SearchBar
+              onChange={this.onChange}
+              placeholder="搜索地址"
+              maxLength={8}
+              autoFocus={true}
+              showCancelButton={false}/>
           </div>
           {/*地址列表*/}
           <div className={styles.address_wrapper}>

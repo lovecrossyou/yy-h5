@@ -101,7 +101,7 @@ class Login extends React.Component{
 
   render(){
     return (
-      <div>
+      <div className='global_container'>
         <div className={styles.login_wrapper}>
           <WhiteSpace/>
           <MobileLoginWrapper loginClick={this.loginClick}/>

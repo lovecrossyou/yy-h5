@@ -66,7 +66,7 @@ const DeliveryList = ({onClick}) => {
 function Home(props) {
   const {shopParamInfo} = props.store ;
   return <DocumentTitle title='首页'>
-    <div>
+    <div className='global_container'>
       <ShopHeader
         shopInfo={shopParamInfo}
         onClick={()=>{
