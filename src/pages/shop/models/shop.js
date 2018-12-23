@@ -1,5 +1,5 @@
 import {Toast} from 'antd-mobile';
-import {queryShopInfo, queryUpdateShop, queryUserCreate, queryUserList} from '../services/shop';
+import { queryShopInfo, queryUpdateShop, queryUpload, queryUserCreate, queryUserList } from '../services/shop';
 import {getShopTye} from "../../../utils/config";
 
 export default {
@@ -92,6 +92,11 @@ export default {
         return;
       }
       cb && cb();
+    },
+
+    * upload({payload},{call}){
+      const res = yield call(queryUpload,payload);
+      
     }
   },
   reducers: {

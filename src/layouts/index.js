@@ -28,11 +28,13 @@ function BasicLayout(props) {
         {props.text}
       </NavBar>
 
-      <TransitionGroup>
-        <CSSTransition key={props.pathname} classNames="fade" timeout={300}>
-          {props.children}
-        </CSSTransition>
-      </TransitionGroup>
+      {props.children}
+
+      {/*<TransitionGroup>*/}
+        {/*<CSSTransition key={props.pathname} classNames="fade" timeout={300}>*/}
+          {/*{props.children}*/}
+        {/*</CSSTransition>*/}
+      {/*</TransitionGroup>*/}
 
 
     </div>

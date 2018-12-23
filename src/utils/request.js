@@ -42,7 +42,20 @@ export default async function request(url, options,type='json') {
       method: options.method,
     };
   }
-  else {
+  else if (options.method === 'fileupload') {
+    const csrfToken = document.cookie.split('=')[1];
+    opt.method = 'post';
+    const formData = new FormData();
+    formData.append('file', options.body.files);
+    opt.headers = {
+      'x-csrf-token': csrfToken,
+    };
+    opt.body = formData;
+    const response = await fetch('/api' + url, opt);
+    const responseJson = response.json();
+    return responseJson;
+
+  } else {
     opt = {
       body: JSON.stringify(body),
       headers: {
@@ -50,10 +63,10 @@ export default async function request(url, options,type='json') {
       },
       method: options.method,
     };
+    const response = await fetch(BaseUrl(url), opt);
+    checkStatus(response);
+    if (type !== 'json') return response.text();
+    const responseJson = response.json();
+    return responseJson;
   }
-  const response = await fetch(BaseUrl(url), opt);
-  checkStatus(response);
-  if (type !== 'json') return response.text();
-  const responseJson = response.json();
-  return responseJson;
 }

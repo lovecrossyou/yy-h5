@@ -32,3 +32,10 @@ export async function queryUpdateShop (params) {
 }
 
 
+export async function queryUpload(params) {
+  return request('/upload',{
+    method:'fileupload',
+    body:params
+  });
+}
+
