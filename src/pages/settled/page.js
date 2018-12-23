@@ -143,7 +143,7 @@ class Settled extends React.Component {
     const {productImageUrls,shopParamInfo} = this.props.store;
     return (
       <DocumentTitle title='入驻'>
-        <div>
+        <div className='global_container'>
           <List>
             <Picker
               data={shopTypeData}
