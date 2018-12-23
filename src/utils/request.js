@@ -41,6 +41,11 @@ export default async function request(url, options,type='json') {
       },
       method: options.method,
     };
+    const response = await fetch(BaseUrl(url), opt);
+    checkStatus(response);
+    if (type !== 'json') return response.text();
+    const responseJson = response.json();
+    return responseJson;
   }
   else if (options.method === 'fileupload') {
     const csrfToken = document.cookie.split('=')[1];

@@ -9,7 +9,7 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname, query }) => {
-        if (pathname === '/login') {
+        if (pathname === '/login/page') {
           dispatch({
             type: 'fetch',
           });

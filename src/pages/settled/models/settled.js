@@ -22,6 +22,9 @@ export default {
           dispatch({
             type: 'fetch',
           })
+          dispatch({
+            type: 'global/setTitle', payload:'入驻'
+          });
         }
       });
     }
