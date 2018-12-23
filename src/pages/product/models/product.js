@@ -30,6 +30,16 @@ export default {
             type: 'global/setTitle', payload:'分类'
           });
         }
+        else if(pathname === '/product/productsummary'){
+          dispatch({
+            type: 'global/setTitle', payload:'商品描述'
+          });
+        }
+        else if(pathname === '/product/categoryadd'){
+          dispatch({
+            type: 'global/setTitle', payload:'添加分类'
+          });
+        }
       });
     },
   },

@@ -15,7 +15,7 @@ import * as routerRedux from 'react-router-redux';
 function ProductSummary(props) {
   return (
     <DocumentTitle title='商品描述'>
-      <div>
+      <div className='global_container'>
         <div className={styles.summary_content}>
           <TextareaItem
             {...props.form.getFieldProps('productDescribe', {

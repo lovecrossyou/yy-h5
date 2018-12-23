@@ -1,5 +1,8 @@
 import { connect } from 'dva';
-import { Result } from 'antd-mobile';
+import { Result,Button } from 'antd-mobile';
+import styles from './page.css';
+import router from 'umi/router';
+import React from 'react';
 const myImg = src => <img src={src} className="spe am-icon am-icon-md" alt=""/>;
 const ApplyResult = (props) => {
   const {shopParamInfo} = props.store ;
@@ -14,6 +17,11 @@ const ApplyResult = (props) => {
       title="提交完成，请等待审核结果"
       message={message}
     />
+    <div className={styles.footer_btn}>
+      <Button type="primary" onClick={() => {
+        router.replace('/');
+      }}>确定</Button>
+    </div>
   </div>);
 }
 

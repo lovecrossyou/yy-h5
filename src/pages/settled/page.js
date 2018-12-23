@@ -98,7 +98,7 @@ class Settled extends React.Component {
       type: 'settled/createShop',
       payload: shopParams,
       cb: () => {
-        router.push('/settled/applyresult')
+        router.replace('/settled/applyresult')
       }
     })
   }
