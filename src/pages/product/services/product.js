@@ -27,3 +27,11 @@ export async function fetchProductCreate(params) {
     body:params
   });
 }
+
+// 编辑商品
+export async function fetchProductEdit(params) {
+  return request('/merchant/shop/editProduct',{
+    method:'post',
+    body:params
+  });
+}

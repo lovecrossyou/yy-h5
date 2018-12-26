@@ -7,7 +7,7 @@ import {connect} from 'dva';
 import DocumentTitle from 'react-document-title';
 
 import {List,Button} from 'antd-mobile';
-import styles from './page.css';
+import styles from './page.less';
 import {ActivityIndicator} from "../../components/ActivityIndicator";
 
 const Item = List.Item;

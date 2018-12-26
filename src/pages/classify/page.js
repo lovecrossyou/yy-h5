@@ -40,15 +40,12 @@ const RightContent = ({ datas, index,editClick }) => {
 
 class Classify extends Component {
 
-  state = {
-    needIndex: 0,
-  };
-
   handleClick(categoryIndex) {
     //请求分类下商品
-    this.setState({
-      needIndex: categoryIndex,
-    });
+    this.props.dispatch({
+      type:'classify/setCategoryIndex',
+      payload:categoryIndex
+    })
   }
 
   editClick = p =>{
@@ -61,7 +58,7 @@ class Classify extends Component {
   }
 
   render() {
-    const { category_list, category_products } = this.props.store;
+    const { category_list, category_products,categoryIndex } = this.props.store;
     return (
       <DocumentTitle title='商品列表'>
         <div className='global_container'>
@@ -70,8 +67,10 @@ class Classify extends Component {
               <li className={styles.classify_list}>
                 {category_list.map((data, index) => {
                   return (
-                    <span key={index + '#'} onClick={this.handleClick.bind(this, index)}
-                          className={this.state.needIndex == index ? styles.onclick_after : styles.onclick_before}>{data.name}</span>
+                    <span
+                      key={index + '#'}
+                      onClick={this.handleClick.bind(this, index)}
+                      className={categoryIndex === index ? styles.onclick_after : styles.onclick_before}>{data.name}</span>
                   );
                 })
                 }
@@ -79,7 +78,7 @@ class Classify extends Component {
               <RightContent
                 editClick={this.editClick}
                 datas={category_products}
-                index={this.state.needIndex}/>
+                index={categoryIndex}/>
             </ul>
             <div className={styles.footer_btn}>
               <Button type="primary" onClick={()=>{

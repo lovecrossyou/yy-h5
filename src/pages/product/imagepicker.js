@@ -8,9 +8,33 @@ import router from 'umi/router';
 
 
 class ImagePickerWrapper extends React.Component {
-  state = {
-    files: [],
+
+  componentWillMount() {
+    const {formData} = this.props.product ;
+    const productUrlFiles = formData.detailImages.map(url=>{
+      return {
+        url:url
+      }
+    });
+    console.log('productUrlFiles ',productUrlFiles)
+    console.log('formData ',formData)
+    this.savePictures(productUrlFiles);
   }
+
+  savePictures = files=>{
+    this.props.dispatch({
+      type:'product/savePictures',
+      payload:files
+    })
+  }
+
+  removePicture = index=>{
+    this.props.dispatch({
+      type: 'product/removePictureAtIndex',
+      payload: index
+    })
+  }
+
   onChange = (files, type, index) => {
     // return;
     if (type === 'add') {
@@ -20,13 +44,7 @@ class ImagePickerWrapper extends React.Component {
         payload: files[0].file,
         cb: imgUrl => {
           console.log('imgData ', imgUrl)
-          this.props.dispatch({
-            type: 'product/saveProductImageUrl',
-            payload: imgUrl
-          });
-          this.setState({
-            files
-          });
+          this.savePictures(files);
         },
         progressPercent: data => {
           Toast.show(data);
@@ -34,32 +52,27 @@ class ImagePickerWrapper extends React.Component {
       })
     }
     else if (type === 'remove') {
-      this.setState({
-        files
-      });
       //删除图片
-      this.props.dispatch({
-        type: 'product/removeImageUrl',
-        payload: index
-      })
+      this.removePicture(index);
     }
   }
 
   handleClick = () => {
+
     router.goBack();
   }
 
   render() {
-    const {files} = this.state;
+    const {formData} = this.props.product ;
     return (
       <DocumentTitle title='上传图片'>
         <div className='global_container'>
           <WingBlank>
             <ImagePicker
-              files={files}
+              files={formData.detailImages}
               onChange={this.onChange}
               onImageClick={(index, fs) => console.log(index, fs)}
-              selectable={files.length < 9}
+              selectable={formData.detailImages.length < 9}
               multiple={false}
             />
             <div className={styles.footer_btn}>
@@ -73,4 +86,8 @@ class ImagePickerWrapper extends React.Component {
 }
 
 
-export default connect()(ImagePickerWrapper)
+export default connect(state=>{
+  return {
+    product:state.product
+  }
+})(ImagePickerWrapper)

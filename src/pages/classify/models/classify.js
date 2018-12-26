@@ -6,7 +6,8 @@ export default {
   namespace: 'classify',
   state: {
     category_list:[],
-    category_products:[]
+    category_products:[],
+    categoryIndex:0
   },
   subscriptions: {
     setup({ dispatch, history }) {
@@ -74,6 +75,13 @@ export default {
       return {
         ...state,
         category_products:action.payload
+      }
+    },
+
+    setCategoryIndex(state,action){
+      return {
+        ...state,
+        categoryIndex:action.payload
       }
     }
   },

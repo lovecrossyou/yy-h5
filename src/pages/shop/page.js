@@ -5,7 +5,7 @@ import DocumentTitle from 'react-document-title';
 
 import {List, InputItem, WhiteSpace, Button, TextareaItem, Radio, Icon,Toast,Picker} from 'antd-mobile';
 import {createForm} from 'rc-form';
-import styles from './page.css'
+import styles from './page.less'
 import {shopTypeData} from "../../utils/config";
 
 const Item = List.Item;

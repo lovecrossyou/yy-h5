@@ -3,7 +3,7 @@ import React from 'react'
 import {connect} from "dva";
 import {ImagePicker, WingBlank, Button, Toast} from 'antd-mobile';
 import DocumentTitle from 'react-document-title';
-import styles from './page.css';
+import styles from './page.less';
 import router from 'umi/router';
 
 

@@ -89,8 +89,8 @@ class ProductEdit extends React.Component {
       return ;
     }
 
-    formData.price = parseFloat(formData.price)*100 ;
-    formData.originalPrice = parseFloat(formData.originalPrice)*100 ;
+    formData.price = parseFloat(formData.price) ;
+    formData.originalPrice = parseFloat(formData.originalPrice) ;
 
     formData.listImage = productImageUrls[0] ;
     formData.headImage = productImageUrls[0] ;

@@ -42,19 +42,26 @@ class ProductEdit extends React.Component {
       })
 
       console.log('data ',data);
-      return;
+
+      this.props.form.setFieldsValue({
+        headName: formData.headName,
+        price: formData.price,
+        originalPrice: formData.originalPrice,
+        spec: formData.spec,
+        productDescribe: formData.productDescribe,
+      }, () => console.log('after'));
+      console.log('before');
     }
   }
 
   confirmClick = () => {
-    let activeCategory = this.props.store.activeCategory ;
-    let productImageUrls = this.props.store.productImageUrls ;
+    const {category_list,categoryIndex} = this.props.classify ;
+    const category = category_list[categoryIndex] ;
     let formData = this.props.store.formData ;
-
-    console.log('store ',this.props.store);
+    formData.activeCategory = category ;
     console.log('formData ',formData);
 
-    const {headName,price,originalPrice,spec,stock} = formData ;
+    const {headName,price,originalPrice,spec,stock,detailImages,productDescribe,activeCategory} = formData ;
     if(headName=== null){
       Toast.show('请输入商品名称');
       return ;
@@ -84,23 +91,26 @@ class ProductEdit extends React.Component {
       return ;
     }
 
-    if(productImageUrls.length===0){
+    if(detailImages.length===0){
       Toast.show('请上传商品图片');
       return ;
     }
 
-    formData.price = parseFloat(formData.price)*100 ;
-    formData.originalPrice = parseFloat(formData.originalPrice)*100 ;
+    formData.price = parseFloat(formData.price) ;
+    formData.originalPrice = parseFloat(formData.originalPrice) ;
 
-    formData.listImage = productImageUrls[0] ;
-    formData.headImage = productImageUrls[0] ;
-    formData.detailImages = productImageUrls ;
+    formData.listImage = detailImages[0] ;
+    formData.headImage = detailImages[0] ;
+
+
+
     formData.categoryId = activeCategory.id ;
     formData.tag = '测试标签' ;
 
-    console.log('formData ',formData);
+    console.log('this.props.store ',this.props.store);
+    return;
     this.props.dispatch({
-      type:'product/createProduct',
+      type:'product/editProduct',
       payload: formData,
       cb:()=>{
         this.props.dispatch(routerRedux.goBack());
@@ -111,7 +121,11 @@ class ProductEdit extends React.Component {
   render() {
     const { getFieldProps } = this.props.form;
     const { type } = this.state;
-    const {activeCategory,formData} = this.props.store;
+    const {formData} = this.props.store;
+    const {productDescribe} = formData ;
+
+    const {category_list,categoryIndex} = this.props.classify ;
+    const activeCategory = category_list[categoryIndex] ;
 
     let that = this ;
     console.log('formData ',formData);
@@ -211,7 +225,7 @@ class ProductEdit extends React.Component {
               arrow="horizontal"
               onClick={() => {
                 this.saveFormData();
-                this.props.dispatch(routerRedux.push('/product/productsummary'));
+                this.props.dispatch(routerRedux.push('/product/productsummary?summary='+productDescribe||''));
               }}
             >商品描述</Item>
 
@@ -241,6 +255,7 @@ const ProductEditWrapper = createForm()(ProductEdit);
 
 export default connect(state=>{
   return {
-    store:state.product
+    store:state.product,
+    classify:state.classify
   }
 })(ProductEditWrapper);

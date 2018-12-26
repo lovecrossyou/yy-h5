@@ -26,6 +26,11 @@ export default {
             type: 'global/setTitle', payload:'入驻'
           });
         }
+        else if (pathname === '/settled/map') {
+          dispatch({
+            type: 'global/setTitle', payload:'地址搜索'
+          });
+        }
       });
     }
   },

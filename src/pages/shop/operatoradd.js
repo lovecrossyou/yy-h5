@@ -8,7 +8,7 @@ import {Button, Picker, InputItem, List, Toast, Icon} from 'antd-mobile';
 import {createForm} from 'rc-form';
 import DocumentTitle from 'react-document-title';
 
-import styles from './page.css'
+import styles from './page.less'
 import icon_left from './images/left.jpg'
 
 const roleData = [{
