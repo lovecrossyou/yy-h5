@@ -59,11 +59,12 @@ class ProductEdit extends React.Component {
   }
 
   confirmClick = () => {
+    const {activeCategory} = this.props.store ;
     const {category_list,categoryIndex} = this.props.classify ;
     const category = category_list[categoryIndex] ;
     let formData = Object.assign({},this.props.store.formData) ;
 
-    const {headName,price,originalPrice,spec,stock,detailImages,productDescribe,activeCategory} = formData ;
+    const {headName,price,originalPrice,spec,stock,detailImages,productDescribe} = formData ;
     if(headName=== null){
       Toast.show('请输入商品名称');
       return ;
@@ -100,13 +101,13 @@ class ProductEdit extends React.Component {
 
     formData.price = parseFloat(formData.price) ;
     formData.originalPrice = parseFloat(formData.originalPrice) ;
+    formData.detailImages = detailImages.map(d=>d.url);
+    formData.listImage = formData.detailImages[0] ;
+    formData.headImage = formData.detailImages[0] ;
 
-    formData.listImage = detailImages[0] ;
-    formData.headImage = detailImages[0] ;
 
 
-
-    formData.categoryId = category.id ;
+    formData.categoryId = activeCategory.id ;
     formData.tag = '测试标签' ;
 
     console.log('this.props.store ',this.props.store);
