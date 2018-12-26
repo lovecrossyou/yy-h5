@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { routerRedux } from 'dva/router';
+import router from 'umi/router';
 import DocumentTitle from 'react-document-title';
 import {Button} from 'antd-mobile';
 
@@ -54,7 +54,23 @@ class Classify extends Component {
       type:'product/saveFormData',
       payload:p
     })
-    this.props.dispatch(routerRedux.push('/product/edit?id='+p.id))
+    router.push('/product/edit?id='+p.id);
+  }
+
+  addProduct = ()=>{
+    this.props.dispatch({
+      type:'product/resetFormData',
+      payload:{
+        headName: null,
+        price: null,
+        originalPrice: null,
+        spec: null,
+        stock: null,
+        detailImages: []
+      }
+    })
+    router.push('/product/page');
+
   }
 
   render() {
@@ -81,9 +97,7 @@ class Classify extends Component {
                 index={categoryIndex}/>
             </ul>
             <div className={styles.footer_btn}>
-              <Button type="primary" onClick={()=>{
-                this.props.dispatch(routerRedux.push('/product/page'))
-              }}>添加商品</Button>
+              <Button type="primary" onClick={this.addProduct.bind(this)}>添加商品</Button>
             </div>
 
             <ActivityIndicator animating={this.props.loading}/>

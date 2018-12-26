@@ -50,6 +50,8 @@ export default {
             type: 'global/setTitle', payload: '商品编辑'
           });
         }
+        else if(pathname === '/product/page'){
+        }
       });
     },
   },
@@ -164,14 +166,14 @@ export default {
     // 添加图片
     addPicture(state, action) {
       const picUrl = action.payload;
-      const formData = state.formData;
-      let detailImages = formData.detailImages;
+      let formData = Object.assign({},state.formData);
+      let detailImages = formData.detailImages ;
       detailImages = detailImages.push({
         url: picUrl
       })
       return {
         ...state,
-        formData: {...formData,detailImages}
+        formData: formData
       };
     },
 
@@ -196,6 +198,13 @@ export default {
       return {
         ...state,
         formData: {...formData,detailImages}
+      };
+    },
+
+    resetFormData(state,action){
+      return {
+        ...state,
+        formData: action.payload
       };
     }
   },

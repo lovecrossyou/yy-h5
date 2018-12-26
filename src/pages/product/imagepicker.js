@@ -28,6 +28,14 @@ class ImagePickerWrapper extends React.Component {
     })
   }
 
+  addPicture = url=>{
+    this.props.dispatch({
+      type:'product/addPicture',
+      payload:url
+    })
+  }
+
+
   removePicture = index=>{
     this.props.dispatch({
       type: 'product/removePictureAtIndex',
@@ -36,15 +44,18 @@ class ImagePickerWrapper extends React.Component {
   }
 
   onChange = (files, type, index) => {
-    // return;
+
     if (type === 'add') {
+
+      console.log('files### ',files);
+      const index = files.length -1 ;
       //上传图片
       this.props.dispatch({
         type: 'global/upload',
-        payload: files[0].file,
+        payload: files[index].file,
         cb: imgUrl => {
-          console.log('imgData ', imgUrl)
-          this.savePictures(files);
+          console.log('imgUrl ', imgUrl)
+          this.addPicture(imgUrl);
         },
         progressPercent: data => {
           Toast.show(data);

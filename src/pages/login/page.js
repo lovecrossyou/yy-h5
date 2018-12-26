@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'dva';
-import { routerRedux } from 'dva/router';
+import router from 'umi/router';
 import {Button, WhiteSpace,InputItem,List,Toast} from 'antd-mobile';
 import { createForm } from 'rc-form';
 import DocumentTitle from 'react-document-title';
@@ -94,7 +94,7 @@ class Login extends React.Component{
       },
       cb:()=>{
         Toast.hide();
-        this.props.dispatch(routerRedux.replace('/'));
+        router.replace('/');
       }
     })
   }
@@ -111,13 +111,13 @@ class Login extends React.Component{
             <div
               className={styles.btn_wrapper_l}
               onClick={()=>{
-                this.props.dispatch(routerRedux.push('/settled/page'))
+                router.push('/settled/page')
               }}
             >注册</div>
             <div
               className={styles.btn_wrapper_r}
               onClick={()=>{
-                this.props.dispatch(routerRedux.push('/login/resetpassword'))
+                router.push('/login/resetpassword')
               }}
             >忘记密码</div>
           </div>

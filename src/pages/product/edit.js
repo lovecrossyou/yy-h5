@@ -108,7 +108,7 @@ class ProductEdit extends React.Component {
     formData.tag = '测试标签' ;
 
     console.log('this.props.store ',this.props.store);
-    return;
+    // return;
     this.props.dispatch({
       type:'product/editProduct',
       payload: formData,
