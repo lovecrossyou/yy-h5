@@ -244,7 +244,7 @@ class ProductEdit extends React.Component {
           </List>
 
           <div className={styles.footer_btn}>
-            <Button type="primary" onClick={this.confirmClick}>完成</Button>
+            <Button type="primary" onClick={this.confirmClick}>添加</Button>
           </div>
         </div>
       </DocumentTitle>

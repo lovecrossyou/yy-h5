@@ -124,7 +124,7 @@ class MobileLogin extends React.Component {
 
             <div className={styles.btn_confirm}>
               <List.Item>
-                <Button type="primary" onClick={this.confirmClick}>确认</Button>
+                <Button type="primary" onClick={this.updateClick}>确认</Button>
               </List.Item>
             </div>
           </List>

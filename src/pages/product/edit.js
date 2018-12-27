@@ -63,7 +63,13 @@ class ProductEdit extends React.Component {
     console.log('before');
   }
 
-  confirmClick = () => {
+  // 下架商品
+  soldOutClick = ()=>{
+
+  }
+
+  // 更新商品
+  updateClick = () => {
     const {category_list,categoryIndex} = this.props.classify ;
     const category = category_list[categoryIndex] ;
     let formData = this.props.store.formData ;
@@ -114,13 +120,13 @@ class ProductEdit extends React.Component {
     formData.categoryId = activeCategory.id ;
     formData.tag = '测试标签' ;
 
-    console.log('this.props.store ',this.props.store);
-    // return;
+    Toast.loading('更新中',0);
     this.props.dispatch({
       type:'product/editProduct',
       payload: formData,
       cb:()=>{
         this.props.dispatch(routerRedux.goBack());
+        Toast.hide();
       }
     })
   };
@@ -248,8 +254,12 @@ class ProductEdit extends React.Component {
 
           </List>
 
+          <div className={styles.footer_btn_off}>
+            <Button type="primary" onClick={this.updateClick}>更新</Button>
+          </div>
+
           <div className={styles.footer_btn}>
-            <Button type="primary" onClick={this.confirmClick}>完成</Button>
+            <Button type="default" onClick={this.soldOutClick}>下架</Button>
           </div>
         </div>
       </DocumentTitle>

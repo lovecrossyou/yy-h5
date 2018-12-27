@@ -5,6 +5,14 @@
   right: 12px;
 }
 
+.footer_btn_off{
+  position: fixed;
+  bottom: 60px;
+  left: 12px;
+  right: 12px;
+}
+
+
 .summary_content{
   height:193px;
   width: 95%;
