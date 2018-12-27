@@ -29,6 +29,10 @@ class ProductEdit extends React.Component {
   };
 
 
+  componentDidMount() {
+    this.showData(this.props.store.formData);
+  }
+
   saveFormData = (props)=>{
     if(props){
       const formData = this.props.store.formData ;
@@ -42,16 +46,21 @@ class ProductEdit extends React.Component {
       })
 
       console.log('data ',data);
-
-      this.props.form.setFieldsValue({
-        headName: formData.headName,
-        price: formData.price,
-        originalPrice: formData.originalPrice,
-        spec: formData.spec,
-        productDescribe: formData.productDescribe,
-      }, () => console.log('after'));
-      console.log('before');
+      this.showData(formData);
     }
+  }
+
+  // 回显数据
+  showData = (formData) =>{
+    this.props.form.setFieldsValue({
+      headName: formData.headName,
+      price: formData.price,
+      originalPrice: formData.originalPrice,
+      spec: formData.spec,
+      productDescribe: formData.productDescribe,
+      stock: formData.stock,
+    }, () => console.log('after'));
+    console.log('before');
   }
 
   confirmClick = () => {
@@ -101,8 +110,6 @@ class ProductEdit extends React.Component {
 
     formData.listImage = detailImages[0] ;
     formData.headImage = detailImages[0] ;
-
-
 
     formData.categoryId = activeCategory.id ;
     formData.tag = '测试标签' ;

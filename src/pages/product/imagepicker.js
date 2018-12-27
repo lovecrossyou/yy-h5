@@ -9,7 +9,7 @@ import router from 'umi/router';
 
 class ImagePickerWrapper extends React.Component {
 
-  componentWillMount() {
+  componentDidMount() {
     const {formData} = this.props.product ;
     const productUrlFiles = formData.detailImages.map(url=>{
       return {
@@ -18,6 +18,13 @@ class ImagePickerWrapper extends React.Component {
     });
     console.log('productUrlFiles ',productUrlFiles)
     console.log('formData ',formData)
+    this.savePictures(productUrlFiles);
+  }
+
+
+  componentWillUnmount() {
+    const {formData} = this.props.product ;
+    const productUrlFiles = formData.detailImages.map(d=>d.url);
     this.savePictures(productUrlFiles);
   }
 
