@@ -95,8 +95,18 @@ class Login extends React.Component{
       cb:()=>{
         Toast.hide();
         router.replace('/');
+        this.registToJPush(username);
       }
     })
+  }
+
+  // 注册到极光推送
+  registToJPush = (username) => {
+    const action = {
+      type:'registToJPush',
+      data:username
+    }
+    window.postMessage(JSON.stringify(action));
   }
 
   render(){
