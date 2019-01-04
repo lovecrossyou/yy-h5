@@ -77,7 +77,7 @@ const MgrItem = ({item = null, onClick}) => {
 
 function Manager(props) {
   return <DocumentTitle title='管理'>
-    <div className={styles.mgr_container}>
+    <div className='global_container'>
       <div className={styles.mgr_row}>
         <MgrItem
           item={LabelMgr}
@@ -89,7 +89,12 @@ function Manager(props) {
           onClick={() => {
             router.push('/classify/page')
           }}/>
-        <MgrItem item={SaleMgr}/>
+        <MgrItem
+          item={SaleMgr}
+          onClick={()=>{
+            router.push('/marketing/page')
+          }}
+        />
       </div>
 
       <div className={styles.mgr_row}>
