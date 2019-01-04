@@ -106,7 +106,10 @@ class Login extends React.Component{
       type:'registToJPush',
       data:username
     }
-    window.webkit.messageHandlers.dispatchAction.postMessage(JSON.stringify(action));
+
+    window.webkit.messageHandlers.dispatchAction.postMessage({
+      "data": JSON.stringify(action)
+    });
   }
 
   render(){
