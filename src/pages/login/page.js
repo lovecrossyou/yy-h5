@@ -107,8 +107,8 @@ class Login extends React.Component{
       data:username
     }
 
-    window.webkit.messageHandlers.currentCookies.postMessage({
-      "body": "buttonActionMessage"
+    window.webkit.messageHandlers.dispatchAction.postMessage({
+      "data": JSON.stringify(action)
     });
   }
 
