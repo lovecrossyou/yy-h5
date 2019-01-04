@@ -65,7 +65,7 @@ const ProductInfoContainer = () => {
 
 function OrderDetail() {
   return <DocumentTitle title='订单详情'>
-    <div className={styles.container}>
+    <div className='global_container'>
       <WhiteSpace/>
       <WingBlank>
         <AddressContainer/>
