@@ -50,3 +50,29 @@
   color:rgba(245,122,43,1);
   line-height:20px;
 }
+
+.footer_btn{
+  position: fixed;
+  bottom: 10px;
+  left: 12px;
+  right: 12px;
+}
+
+.btn_add_wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_wrapper{
+  width: 33%;
+  height: 50px;
+  /*background-color: #999999;*/
+  color: #333333;
+  border: solid 1px #e2e2e2;
+  text-align: center;
+  line-height: 50px;
+
+  margin: 20px 0;
+}

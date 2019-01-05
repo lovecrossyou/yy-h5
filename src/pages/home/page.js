@@ -48,8 +48,6 @@ const DeliveryList = ({onClick}) => {
     >
       <div className={styles.delivery_wrapper}  style={{flexDirection:'column'}}>
         <DeliveryOrderItem onClick={onClick}/>
-        <DeliveryOrderItem onClick={onClick}/>
-        <DeliveryOrderItem onClick={onClick}/>
 
       </div>
       <div className={styles.delivery_wrapper} style={{height:contentHeight}}>

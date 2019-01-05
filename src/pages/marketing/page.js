@@ -10,7 +10,7 @@ import styles from './page.css';
 
 
 const MgrItem = ({item = null, onClick}) => {
-  return <div className={styles.item}>
+  return <div className={styles.item} onClick={onClick}>
     <div className={styles.item_icon}>
       {item.icon}
     </div>
@@ -42,14 +42,18 @@ function Marketing(props) {
         <MgrItem
           item={Man}
           onClick={() => {
-            router.push('/product/productcategory')
+            router.push('/marketing/addmanjian')
           }}/>
         <MgrItem
           item={Shou}
           onClick={() => {
-            router.push('/classify/page')
+            router.push('/marketing/addshoudan')
           }}/>
-        <MgrItem item={Fan}/>
+        <MgrItem
+          onClick={() => {
+            router.push('/marketing/addfanquan')
+          }}
+          item={Fan}/>
       </div>
     </div>
   </DocumentTitle>
