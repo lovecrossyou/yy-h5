@@ -110,6 +110,10 @@ class Login extends React.Component{
     window.webkit.messageHandlers.dispatchAction.postMessage({
       "data": JSON.stringify(action)
     });
+
+    window.dispatchAction.postMessage({
+      "data": JSON.stringify(action)
+    });
   }
 
   render(){
