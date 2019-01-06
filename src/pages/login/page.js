@@ -113,9 +113,7 @@ class Login extends React.Component{
       });
     }
     if(window.dispatchAction){
-      window.dispatchAction.postMessage({
-        "data": JSON.stringify(action)
-      });
+      window.dispatchAction.postMessage(JSON.stringify(action));
     }
   }
 
