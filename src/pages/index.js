@@ -3,6 +3,18 @@ import { connect } from 'dva';
 
 import {TabBar} from 'antd-mobile';
 import Home from '../pages/home/page'
+
+import home_selected from '../assets/home_selected.png'
+import home_icon from '../assets/home_selected.png'
+
+
+import guanli_selected from '../assets/guanli-4@2x.png'
+import guanli_icon from '../assets/guanli.png'
+
+
+import me_selected from '../assets/wode-3@2x.png'
+import me_icon from '../assets/wode.png'
+
 import Manager from './manage/page'
 import Me from './me/page'
 
@@ -15,33 +27,6 @@ class Index extends React.Component {
     };
   }
 
-  renderContent(pageText) {
-    return (
-      <div style={{backgroundColor: 'white', height: '100%', textAlign: 'center'}}>
-        <div style={{paddingTop: 60}}>Clicked “{pageText}” tab， show “{pageText}” information</div>
-        <a style={{display: 'block', marginTop: 40, marginBottom: 20, color: '#108ee9'}}
-           onClick={(e) => {
-             e.preventDefault();
-             this.setState({
-               hidden: !this.state.hidden,
-             });
-           }}
-        >
-          Click to show/hide tab-bar
-        </a>
-        <a style={{display: 'block', marginBottom: 600, color: '#108ee9'}}
-           onClick={(e) => {
-             e.preventDefault();
-             this.setState({
-               fullScreen: !this.state.fullScreen,
-             });
-           }}
-        >
-          Click to switch fullscreen
-        </a>
-      </div>
-    );
-  }
 
   getTabNameString = tab=>{
     if(tab === 'HomeTab')return '首页' ;
@@ -70,51 +55,26 @@ class Index extends React.Component {
       <div style={{position: 'fixed', height: '100%', width: '100%'}}>
         <TabBar
           unselectedTintColor="#949494"
-          tintColor="#33A3F4"
+          tintColor="#FF8638"
           barTintColor="white"
           hidden={this.state.hidden}
         >
           <TabBar.Item
             title="首页"
             key="Home"
-            icon={<div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat'
-            }}
-            />
+            icon={<img style={{width:'22px',height:'22px'}} src={home_icon} alt=''/>
             }
-            selectedIcon={<div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat'
-            }}
-            />
-            }
+            selectedIcon={<img style={{width:'22px',height:'22px'}} src={home_selected} alt=''/>}
             selected={selectedTab === 'HomeTab'}
-            badge={1}
             onPress={this.switchTab.bind(this,'HomeTab')}
             data-seed="logId"
           >
             <Home/>
           </TabBar.Item>
           <TabBar.Item
-            icon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg) center center /  21px 21px no-repeat'
-              }}
-              />
+            icon={<img style={{width:'22px',height:'22px'}} src={guanli_icon} alt=''/>
             }
-            selectedIcon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg) center center /  21px 21px no-repeat'
-              }}
-              />
-            }
+            selectedIcon={<img style={{width:'22px',height:'22px'}} src={guanli_selected} alt=''/>}
             title="管理"
             key="Manager"
             selected={selectedTab === 'ManagerTab'}
@@ -124,22 +84,9 @@ class Index extends React.Component {
             <Manager/>
           </TabBar.Item>
           <TabBar.Item
-            icon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  21px 21px no-repeat'
-              }}
-              />
+            icon={<img style={{width:'22px',height:'22px'}} src={me_icon} alt=''/>
             }
-            selectedIcon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  21px 21px no-repeat'
-              }}
-              />
-            }
+            selectedIcon={<img style={{width:'22px',height:'22px'}} src={me_selected} alt=''/>}
             title="我的"
             key="Mine"
             selected={selectedTab === 'MineTab'}
