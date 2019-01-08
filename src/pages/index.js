@@ -8,8 +8,8 @@ import home_selected from '../assets/home_selected.png'
 import home_icon from '../assets/dianpu.png'
 
 
-import guanli_selected from '../assets/guanli-4@2x.png'
-import guanli_icon from '../assets/guanli.png'
+import manage_selected from '../assets/guanli-4@2x.png'
+import manage_icon from '../assets/guanli.png'
 
 
 import me_selected from '../assets/wode-3@2x.png'
@@ -57,7 +57,6 @@ class Index extends React.Component {
           unselectedTintColor="#949494"
           tintColor="#FF8638"
           barTintColor="white"
-          hidden={this.state.hidden}
         >
           <TabBar.Item
             title="首页"
@@ -72,9 +71,9 @@ class Index extends React.Component {
             <Home/>
           </TabBar.Item>
           <TabBar.Item
-            icon={<img style={{width:'22px',height:'22px'}} src={guanli_icon} alt=''/>
+            icon={<img style={{width:'22px',height:'22px'}} src={manage_icon} alt=''/>
             }
-            selectedIcon={<img style={{width:'22px',height:'22px'}} src={guanli_selected} alt=''/>}
+            selectedIcon={<img style={{width:'22px',height:'22px'}} src={manage_selected} alt=''/>}
             title="管理"
             key="Manager"
             selected={selectedTab === 'ManagerTab'}

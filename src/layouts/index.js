@@ -14,7 +14,7 @@ function BasicLayout(props) {
       <NavBar
         mode="dark"
         className={styles.nav}
-        style={{ backgroundColor: "#FF8638",height:'45px',position:"fixed",zIndex:"11",width:"100%",top:"0" }}
+        style={{ backgroundColor: "#FF8638",height:'64px',position:"fixed",zIndex:"11",width:"100%",top:"0" }}
         icon={
           (props.pathname === "/main" || props.pathname === "/") ?null: (
             <Icon type="left" size={'lg'}/>
