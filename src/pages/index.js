@@ -5,7 +5,7 @@ import {TabBar} from 'antd-mobile';
 import Home from '../pages/home/page'
 
 import home_selected from '../assets/home_selected.png'
-import home_icon from '../assets/home_selected.png'
+import home_icon from '../assets/dianpu.png'
 
 
 import guanli_selected from '../assets/guanli-4@2x.png'

@@ -1,7 +1,7 @@
 .mgr_row{
   display: flex;
   width: 100%;
-  padding: 0 12px;
+  padding: 10px 12px;
   box-sizing: border-box;
 
   flex-direction: row;
