@@ -52,7 +52,7 @@ class Index extends React.Component {
     const {selectedTab} = this.props.store ;
     console.log('selectedTab ',selectedTab)
     return (
-      <div style={{position: 'fixed', height: '100%', width: '100%'}}>
+      <div style={{position: 'fixed', height: '100%', width: '100%',bottom:0}}>
         <TabBar
           unselectedTintColor="#949494"
           tintColor="#FF8638"

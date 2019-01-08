@@ -23,9 +23,9 @@ body {
 }
 
 .global_container {
-  /*margin-top: 64px;*/
-  /*height: 100%;*/
-  /*position: relative;*/
+  margin-top: 64px;
+  height: 100%;
+  position: relative;
 }
 
 .am-navbar-left {
