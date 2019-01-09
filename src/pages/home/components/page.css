@@ -20,8 +20,22 @@
   line-height:20px;
 
   margin-top: 10px;
+
+  display: inline-block;
 }
 
+.addr_icon{
+  height: 15px;
+  width: 11px;
+  margin-right: 5px;
+  margin-top: 2.5px;
+}
+
+.user_icon{
+  height: 11px;
+  width: 12px;
+  margin-right: 5px;
+}
 
 .item_contact{
   height:20px;
@@ -30,6 +44,8 @@
   font-weight:400;
   color:rgba(85,85,85,1);
   line-height:20px;
+  display: inline-block;
+
 }
 
 
