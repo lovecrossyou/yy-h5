@@ -78,44 +78,44 @@ const MgrItem = ({item = null, onClick}) => {
 function Manager(props) {
   return <DocumentTitle title='管理'>
     <div className='global_container'>
-      <div className={styles.mgr_row}>
-        <MgrItem
-          item={LabelMgr}
-          onClick={() => {
-            router.push('/product/productcategory')
-          }}/>
-        <MgrItem
-          item={ProductMgr}
-          onClick={() => {
-            router.push('/classify/page')
-          }}/>
-        <MgrItem
-          item={SaleMgr}
-          onClick={()=>{
-            router.push('/marketing/page')
-          }}
-        />
-      </div>
+        <div className={styles.mgr_row}>
+          <MgrItem
+            item={LabelMgr}
+            onClick={() => {
+              router.push('/product/productcategory')
+            }}/>
+          <MgrItem
+            item={ProductMgr}
+            onClick={() => {
+              router.push('/classify/page')
+            }}/>
+          <MgrItem
+            item={SaleMgr}
+            onClick={()=>{
+              router.push('/marketing/page')
+            }}
+          />
+        </div>
 
-      <div className={styles.mgr_row}>
-        <MgrItem
-          item={OperatorMgr}
-          onClick={() => {
-            router.push('/shop/operatormgr')
-          }}/>
-        <MgrItem item={OrderMgr}/>
-        <MgrItem item={ShopMgr}/>
-      </div>
+        <div className={styles.mgr_row}>
+          <MgrItem
+            item={OperatorMgr}
+            onClick={() => {
+              router.push('/shop/operatormgr')
+            }}/>
+          <MgrItem item={OrderMgr}/>
+          <MgrItem item={ShopMgr}/>
+        </div>
 
-      <div className={styles.mgr_row}>
-        <MgrItem item={TicketMgr}/>
-        <MgrItem item={WithdrawMgr}
-           onClick={() => {
-             router.push('/withdraw/page')
-           }}
-        />
-        <MgrItem/>
-      </div>
+        <div className={styles.mgr_row}>
+          <MgrItem item={TicketMgr}/>
+          <MgrItem item={WithdrawMgr}
+                   onClick={() => {
+                     router.push('/withdraw/page')
+                   }}
+          />
+          <MgrItem/>
+        </div>
     </div>
   </DocumentTitle>
 }
