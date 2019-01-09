@@ -6,6 +6,15 @@ import { createForm } from 'rc-form';
 import DocumentTitle from 'react-document-title';
 
 import styles from './page.less'
+import login_banner from './images/timg.jpg'
+
+
+const Banner = ()=>{
+  return <div className={styles.login_banner}>
+    <div>广告位</div>
+  </div>
+}
+
 
 const TOTALSEC = 60 ;
 class MobileLogin extends React.Component {
@@ -120,6 +129,7 @@ class Login extends React.Component{
   render(){
     return (
       <div className='global_container'>
+        <Banner/>
         <div className={styles.login_wrapper}>
           <WhiteSpace/>
           <MobileLoginWrapper loginClick={this.loginClick}/>
@@ -131,7 +141,7 @@ class Login extends React.Component{
               onClick={()=>{
                 router.push('/settled/page')
               }}
-            >注册</div>
+            >商家入驻</div>
             <div
               className={styles.btn_wrapper_r}
               onClick={()=>{
