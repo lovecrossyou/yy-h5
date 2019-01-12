@@ -7,8 +7,14 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styles from './index.css';
 
 function BasicLayout(props) {
-  // return <div style={{height:'100%'}}> {props.children}</div>;
-  console.log('BasicLayout ',props.text);
+
+  if(props.pathname === "/login/page"){
+    return (
+      <div className={styles.wrapper}>
+        {props.children}
+      </div>
+      )
+  }
   return (
     <div className={styles.wrapper}>
       <NavBar
@@ -16,7 +22,7 @@ function BasicLayout(props) {
         className={styles.nav}
         style={{ backgroundColor: "#FF8638",height:'64px',position:"fixed",zIndex:"11",width:"100%",top:"0" }}
         icon={
-          (props.pathname === "/main" || props.pathname === "/") ?null: (
+          (props.pathname === "/main" || props.pathname === "/"||props.pathname === "/login/page") ?null: (
             <Icon type="left" size={'lg'}/>
           )
         }
@@ -27,16 +33,7 @@ function BasicLayout(props) {
       >
         {props.text}
       </NavBar>
-
       {props.children}
-
-      {/*<TransitionGroup>*/}
-        {/*<CSSTransition key={props.pathname} classNames="fade" timeout={300}>*/}
-          {/*{props.children}*/}
-        {/*</CSSTransition>*/}
-      {/*</TransitionGroup>*/}
-
-
     </div>
   );
 }

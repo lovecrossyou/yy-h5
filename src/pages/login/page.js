@@ -6,12 +6,12 @@ import { createForm } from 'rc-form';
 import DocumentTitle from 'react-document-title';
 
 import styles from './page.less'
-import login_banner from './images/timg.jpg'
+import login_banner from './images/login_banner.jpg'
 
 
 const Banner = ()=>{
   return <div className={styles.login_banner}>
-    <div>广告位</div>
+    <img src={login_banner}/>
   </div>
 }
 
@@ -128,7 +128,7 @@ class Login extends React.Component{
 
   render(){
     return (
-      <div className='global_container'>
+      <div>
         <Banner/>
         <div className={styles.login_wrapper}>
           <WhiteSpace/>
