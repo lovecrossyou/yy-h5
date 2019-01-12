@@ -2,13 +2,13 @@ import { NavBar, Icon } from "antd-mobile";
 import { connect } from "dva";
 import router from "umi/router";
 import withRouter from "umi/withRouter";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import styles from './index.css';
 
 function BasicLayout(props) {
-
-  if(props.pathname === "/login/page"){
+  console.log('BasicLayout pathname',props)
+  console.log('BasicLayout pathname',props.pathname)
+  if(props.pathname === "/login/page" ||props.pathname === '/'){
     return (
       <div className={styles.wrapper}>
         {props.children}
@@ -20,7 +20,7 @@ function BasicLayout(props) {
       <NavBar
         mode="dark"
         className={styles.nav}
-        style={{ backgroundColor: "#FF8638",height:'64px',position:"fixed",zIndex:"11",width:"100%",top:"0" }}
+        style={{ backgroundColor: "#FF8638",height:'64px' }}
         icon={
           (props.pathname === "/main" || props.pathname === "/"||props.pathname === "/login/page") ?null: (
             <Icon type="left" size={'lg'}/>

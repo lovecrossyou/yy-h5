@@ -23,8 +23,8 @@ body {
 }
 
 .global_container {
-  margin-top: 84px;
-  /*height: 100%;*/
+  /*margin-top: 84px;*/
+  height: 100%;
   position: relative;
 }
 

@@ -11,7 +11,7 @@ import login_banner from './images/login_banner.jpg'
 
 const Banner = ()=>{
   return <div className={styles.login_banner}>
-    <img src={login_banner}/>
+    <img src={login_banner} style={{width:'100%'}}/>
   </div>
 }
 
