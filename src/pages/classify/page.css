@@ -5,17 +5,17 @@
   list-style: none;
 }
 .warpper{
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  background-color: #fff;
+  /*width: 100%;*/
+  /*height: 100%;*/
+  /*display: flex;*/
+  /*flex-direction: row;*/
+  /*background-color: #fff;*/
 }
 ul{
   padding-bottom: 60px;
   box-sizing: border-box;
 }
-.warpper ul{
+.warpper >ul{
   width: 100%;
   height: 100%;
   display: flex;
