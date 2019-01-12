@@ -99,9 +99,12 @@ class ProductEdit extends React.Component {
       return ;
     }
 
-    formData.price = parseFloat(formData.price) ;
-    formData.originalPrice = parseFloat(formData.originalPrice) ;
-    formData.detailImages = detailImages.map(d=>d.url);
+    console.log('this.props.store ',this.props.store);
+    console.log('formData ',formData);
+
+    formData.price = parseFloat(formData.price*100.0) ;
+    formData.originalPrice = parseFloat(formData.originalPrice*100.0) ;
+    formData.detailImages = detailImages.map(d=>d);
     formData.listImage = formData.detailImages[0] ;
     formData.headImage = formData.detailImages[0] ;
 
@@ -110,7 +113,8 @@ class ProductEdit extends React.Component {
     formData.categoryId = activeCategory.id ;
     formData.tag = '测试标签' ;
 
-    console.log('this.props.store ',this.props.store);
+    console.log('this.props.store after',this.props.store);
+    console.log('formData after',formData);
     // return;
     this.props.dispatch({
       type:'product/createProduct',

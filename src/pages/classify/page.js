@@ -8,6 +8,11 @@ import styles from './page.css';
 import icon_edit from './images/icon_edit.png'
 import {ActivityIndicator} from "../../components/ActivityIndicator";
 
+const priceConvert = price=>{
+  const price_yuan = parseFloat(price/100) ;
+  return price_yuan.toFixed(2);
+}
+
 const RightContent = ({ datas, index,editClick }) => {
   if (datas.length <= index) return null;
   return (
@@ -25,7 +30,7 @@ const RightContent = ({ datas, index,editClick }) => {
               <div className={styles.classify_info}>
                 <div className={styles.classify_left_title}>{data.headName}</div>
                 <div className={styles.classify_left_wrapper}>
-                  <div className={styles.classify_left_price}>¥{data.price/100}</div>
+                  <div className={styles.classify_left_price}>¥{priceConvert(data.price)}</div>
                   <div className={styles.classify_left_stock}>库存x1</div>
                 </div>
               </div>
