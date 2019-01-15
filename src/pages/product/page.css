@@ -36,3 +36,6 @@
   box-sizing: border-box;
 }
 
+.wrap_body{
+  height: 100%;
+}
