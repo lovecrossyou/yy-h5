@@ -2,27 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
 import DocumentTitle from 'react-document-title';
-import {Button} from 'antd-mobile';
+import { Button } from 'antd-mobile';
 
 import styles from './page.css';
-import icon_edit from './images/icon_edit.png'
-import {ActivityIndicator} from "../../components/ActivityIndicator";
+import icon_edit from './images/icon_edit.png';
+import { ActivityIndicator } from '../../components/ActivityIndicator';
+import ScrollWrap from '../../components/scroll';
 
-const priceConvert = price=>{
-  const price_yuan = parseFloat(price/100) ;
+
+const priceConvert = price => {
+  const price_yuan = parseFloat(price / 100);
   return price_yuan.toFixed(2);
-}
+};
 
-const RightContent = ({ datas, index,editClick }) => {
+const RightContent = ({ datas, index, editClick }) => {
   if (datas.length <= index) return null;
   return (
+
     <div className={styles.classify_content_wrap}>
       {
         datas[index].products.map((data, index) => {
           return <div
             className={styles.classify_shop}
-            key={index+'#'}
-            onClick={()=>{
+            key={index + '#'}
+            onClick={() => {
               editClick(data);
             }}>
             <div className={styles.classify_left_wrapper}>
@@ -36,7 +39,7 @@ const RightContent = ({ datas, index,editClick }) => {
               </div>
             </div>
             <img src={icon_edit} alt="" className={styles.classify_right_edit}/>
-          </div>
+          </div>;
         })
       }
     </div>
@@ -45,61 +48,76 @@ const RightContent = ({ datas, index,editClick }) => {
 
 class Classify extends Component {
 
+  constructor(props) {
+    super(props);
+    this.clientHeight = window.document.body.clientHeight;
+  }
+
   handleClick(categoryIndex) {
     //请求分类下商品
     this.props.dispatch({
-      type:'classify/setCategoryIndex',
-      payload:categoryIndex
-    })
+      type: 'classify/setCategoryIndex',
+      payload: categoryIndex,
+    });
   }
 
-  editClick = p =>{
-    console.log('p ',p);
+  editClick = p => {
+    console.log('p ', p);
     this.props.dispatch({
-      type:'product/saveFormData',
-      payload:p
-    })
-    router.push('/product/edit?id='+p.id);
-  }
+      type: 'product/saveFormData',
+      payload: p,
+    });
+    router.push('/product/edit?id=' + p.id);
+  };
 
-  addProduct = ()=>{
+  addProduct = () => {
     this.props.dispatch({
-      type:'product/resetFormData',
-      payload:{
+      type: 'product/resetFormData',
+      payload: {
         headName: null,
         price: null,
         originalPrice: null,
         spec: null,
         stock: null,
-        detailImages: []
-      }
-    })
+        detailImages: [],
+      },
+    });
     router.push('/product/page');
 
-  }
+  };
 
   render() {
-    const { category_list, category_products,categoryIndex } = this.props.store;
+    const { category_list, category_products, categoryIndex } = this.props.store;
     return (
       <DocumentTitle title='商品列表'>
         <div className='global_container'>
           <div className={styles.warpper}>
-            <ul>
-              <li className={styles.classify_list}>
-                {category_list.map((data, index) => {
-                  return (
-                    <span
-                      key={index + '#'}
-                      onClick={this.handleClick.bind(this, index)}
-                      className={categoryIndex === index ? styles.onclick_after : styles.onclick_before}>{data.name}</span>
-                  );
-                })
-                }
-              </li>
-              <RightContent
-                editClick={this.editClick}
-                datas={category_products}
-                index={categoryIndex}/>
+            <ul style={{
+              height: `${this.clientHeight - 64 - 50}px`,
+              position: 'relative',
+            }}>
+              <ScrollWrap wrapId="leftNav" wrapClass={styles.wrap_body_left}>
+                <li className={styles.classify_list}>
+                  {
+                    category_list.map((data, index) => {
+                      return (
+                        <span
+                          key={index + '#'}
+                          onClick={this.handleClick.bind(this, index)}
+                          className={categoryIndex === index ? styles.onclick_after : styles.onclick_before}>{data.name}</span>
+                      );
+                    })
+                  }
+                </li>
+              </ScrollWrap>
+              <ScrollWrap wrapId="contentList" wrapClass={styles.wrap_body}>
+                <li className={styles.classify_content_wrap}>
+                  <RightContent
+                    editClick={this.editClick}
+                    datas={category_products}
+                    index={categoryIndex}/>
+                </li>
+              </ScrollWrap>
             </ul>
             <div className={styles.footer_btn}>
               <Button type="primary" onClick={this.addProduct.bind(this)}>添加商品</Button>
@@ -117,6 +135,6 @@ class Classify extends Component {
 export default connect(state => {
   return {
     store: state.classify,
-    loading:state.loading.global
+    loading: state.loading.global,
   };
 })(Classify);

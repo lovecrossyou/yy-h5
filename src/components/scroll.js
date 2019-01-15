@@ -13,7 +13,7 @@ class ScrollWrap extends PureComponent {
       scrollY: true,
       mouseWheel: true,
       bounce: {
-        top: false,
+        top: true,
         bottom: true,
       },
     });

@@ -154,3 +154,20 @@ ul{
   left: 12px;
   right: 12px;
 }
+
+
+.wrap_body_left{
+  width: 85px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.wrap_body{
+  position: absolute;
+  left: 85px;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}

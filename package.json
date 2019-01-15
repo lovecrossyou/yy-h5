@@ -36,6 +36,8 @@
     "qiniu-js": "^2.5.3",
     "react-amap": "^1.2.7",
     "react-document-title": "^2.0.3",
-    "react-transition-group": "^2.5.1"
+    "react-transition-group": "^2.5.1",
+    "antd-mobile": "latest",
+    "react": "latest"
   }
 }
